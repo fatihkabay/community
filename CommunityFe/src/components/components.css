@@ -1,0 +1,78 @@
+.home-btn-container {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.home-container {
+  text-align: center;
+}
+
+.title {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-header {
+  text-align: center;
+}
+
+.login-body {
+  width: 40%;
+  padding: 20px;
+  box-shadow: 3px 2px 3px rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.description {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-button-and-description {
+  display: flex;
+  gap: 0 20px;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-header {
+  text-align: center;
+}
+
+.register-body {
+  width: 40%;
+  padding: 20px;
+  box-shadow: 3px 2px 3px rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.forgot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forgot-header {
+  text-align: center;
+}
+
+.forgot-body {
+  width: 40%;
+  padding: 20px;
+  box-shadow: 3px 2px 3px rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
