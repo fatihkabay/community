@@ -1,27 +1,30 @@
-import React from "react";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import { BrowserRouter as Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+import './index'
 interface Login {
   email: string;
   password: string;
 }
 
 interface Register {
-  name: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
+  gender: string;
+  birthday: number;
 }
 
 function App() {
   return (
+      <BrowserRouter>
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <Route path="/home" element={<Home />} />
     </div>
+      </BrowserRouter>
+
     )
  }
  export default App;

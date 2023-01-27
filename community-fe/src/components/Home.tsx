@@ -1,5 +1,6 @@
 import { Button, Space } from "antd";
 import { Link } from "react-router-dom";
+import "./component.css"
 
 const Home = () => {
   return (

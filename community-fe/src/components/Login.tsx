@@ -5,12 +5,8 @@ import React from 'react';
  const Login = () => {
    const formik = useFormik({
      initialValues: {
-      firstname: '',
-      lastname: '',
        email: '',
        password: '',
-       gender: '',
-       birthday: '',
      },
      onSubmit: values => {
        alert(JSON.stringify(values, null, 2));
@@ -18,7 +14,7 @@ import React from 'react';
    });
    return (
      <form onSubmit={formik.handleSubmit}>
-      
+
        <label htmlFor="email">Email Address</label>
        <input
          id="email"
