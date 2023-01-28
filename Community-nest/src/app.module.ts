@@ -14,7 +14,7 @@ import { User } from "./entity/user.entity";
       port: 5432,
       username: "postgres",
       password: "postgres",
-      database: "CommunityBe",
+      database: "CommunityDB",
       entities: [User],
       synchronize: true,
       autoLoadEntities: true,

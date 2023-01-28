@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { CreateUserRequestDto } from "../../models/userDto";
+import { CreateUserRequestDto, UserResponseDto } from "../../models/User";
+import { LoginRequestDto } from "../../models/User";
 import { UserService } from "./user.service";
 
 @Controller("user")
@@ -9,20 +10,20 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get(":id")
-  getUser(@Param("id") id: string): string {
-    return id;
+  async getUser(@Param("id") id: number) {
+    const res = await this.userService.findOne(id)
+    return res;
   }
+
   @Post("register")
-  async create(@Body() createUserDto: CreateUserRequestDto) {
+  async register(@Body() createUserDto: CreateUserRequestDto) {
     const res = await this.userService.create(createUserDto);
     return res;
   }
-  // @Post("/login")
-  // async save(@Body() saveUserDto: SaveUserDto) {
-  //   this.userService.save(saveUserDto);
-  // }
-  // @Post("/forgot-password")
-  // async forgot(@Body() forgotPasswordDto: ForgotPasswordDto) {
-  //   this.userService.forgotPassword(forgotPasswordDto);
-  // }
+
+  @Post("login")
+  async login(@Body() LoginUserDto: LoginRequestDto): Promise<UserResponseDto> {
+    const res = await this.userService.login(LoginUserDto);
+    return res;
+  }
 }

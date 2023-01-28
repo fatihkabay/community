@@ -17,11 +17,11 @@ export class CreateUserRequestDto {
   gender: string;
 
   @ApiProperty()
-  birthday: number;
+  birthday: string;
 }
 
 
-export class CreateUserResponseDto {
+export class UserResponseDto {
   @ApiProperty()
   id: number;
 
@@ -38,5 +38,13 @@ export class CreateUserResponseDto {
   gender: string;
 
   @ApiProperty()
-  birthday: number;
+  birthday: string;
+}
+
+export class LoginRequestDto {
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  password: string; 
 }
