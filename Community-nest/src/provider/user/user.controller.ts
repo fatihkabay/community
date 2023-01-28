@@ -1,10 +1,8 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { CreateUserDto } from "../../../models/userDto";
-import { SaveUserDto } from "models/saveDto";
-import { ForgotPasswordDto } from "../../../models/forgotPasswordDto";
+import { CreateUserRequestDto } from "../../models/userDto";
 import { UserService } from "./user.service";
-import { userInfo } from "os";
+
 @Controller("user")
 @ApiTags("user")
 export class UserController {
@@ -14,9 +12,10 @@ export class UserController {
   getUser(@Param("id") id: string): string {
     return id;
   }
-  @Post("/register")
-  async create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  @Post("register")
+  async create(@Body() createUserDto: CreateUserRequestDto) {
+    const res = await this.userService.create(createUserDto);
+    return res;
   }
   // @Post("/login")
   // async save(@Body() saveUserDto: SaveUserDto) {
