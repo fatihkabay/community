@@ -1,6 +1,6 @@
-import Home from "./page/Home";
-import Login from "./page/Login";
-import Register from "./page/Register";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import { Routes, Route } from "react-router-dom";
 import './index';
 

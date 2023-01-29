@@ -1,9 +1,9 @@
 import { Button, Space } from "antd";
 import { Link } from "react-router-dom";
-
+import "./home.css"
 const Home = () => {
   return (
-    <div className="home-container">
+    <div className="home-page">
       <div className="home-btn-container">
         <>
           <Space direction="vertical">
@@ -14,6 +14,7 @@ const Home = () => {
               <Link to="/register">
                 <Button type="primary">Register</Button>
               </Link>
+              <Link to="/site" />
             </Space>
           </Space>
         </>

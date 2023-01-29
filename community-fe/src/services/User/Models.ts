@@ -7,11 +7,16 @@ export interface RegisterUserInputModel {
     birthday: number;
 }
 
-export interface RegisterUserOutputModel {
+export interface UserOutputModel {
     id: number;
     name: string;
     lastname: string;
     email: string;
     gender: string;
     birthday: number;
+}
+
+export interface LoginUserInputModel {
+    email: string;
+    password: string;
 }

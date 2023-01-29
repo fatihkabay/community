@@ -15,6 +15,7 @@ import './Register.css';
 import UserService from "../../services/User/UserService";
 import { RegisterUserInputModel } from "../../services/User/Models";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const rules: { [key: string]: Rule[] } = {
   firstName: [
@@ -48,11 +49,13 @@ const rules: { [key: string]: Rule[] } = {
 };
 
 
-const Login = () => {
+
+const Register = () => {
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const onFinish = async (values: CreateUserModel) => {
-    console.log(values);
     setLoading(true);
     const newUser: RegisterUserInputModel = {
       name: values.firstName,
@@ -65,9 +68,14 @@ const Login = () => {
 
     try {
       await UserService.register(newUser);
-    } catch (err) {
-      message.error('Error');
-    } finally {
+      message.success('Successfully registered');
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/login")
+      }, 1500);
+    }
+    catch (error) {
+      message.error('Email is already registered');
       setLoading(false);
     }
   };
@@ -134,4 +142,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

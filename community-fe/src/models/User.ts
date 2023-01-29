@@ -6,3 +6,8 @@ export interface CreateUserModel {
   birthday: string;
   gender: string;
 }
+
+export interface FindUserModel {
+  email: string;
+  password: string;
+}
