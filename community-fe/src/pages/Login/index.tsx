@@ -10,11 +10,10 @@ import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import { FindUserModel } from "../../models/User";
 import { useState } from "react";
 import Loading from "../../components/Loading";
-import './Login.css';
+import './login.css';
 import UserService from "../../services/User/UserService";
 import { LoginUserInputModel } from "../../services/User/Models";
-import { redirect } from "react-router-dom";
-import { string } from "yup";
+import { useNavigate } from "react-router-dom";
 
 const rules: { [key: string]: Rule[] } = {
 
@@ -33,6 +32,8 @@ const rules: { [key: string]: Rule[] } = {
 const Login = () => {
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const onFinish = async (values: FindUserModel) => {
     console.log(values);
     setLoading(true);
@@ -45,6 +46,7 @@ const Login = () => {
       message.success('Successfully registered');
       setTimeout(() => {
         setLoading(false);
+        navigate("/site")
       }, 1500);
     }
      catch (error) {

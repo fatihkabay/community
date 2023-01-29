@@ -11,7 +11,7 @@ import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import { CreateUserModel } from "../../models/User";
 import { useState } from "react";
 import Loading from "../../components/Loading";
-import './Register.css';
+import './register.css';
 import UserService from "../../services/User/UserService";
 import { RegisterUserInputModel } from "../../services/User/Models";
 import dayjs from "dayjs";
@@ -47,8 +47,6 @@ const rules: { [key: string]: Rule[] } = {
     { type: "string", warningOnly: true },
   ],
 };
-
-
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
