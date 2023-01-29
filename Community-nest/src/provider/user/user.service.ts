@@ -18,6 +18,7 @@ export class UserService {
     if (input === null) { 
       throw new NotFoundException("User not found");
     }
+    
 
     const res: UserResponseDto = {
       id: input.Id,
