@@ -8,12 +8,13 @@ import {
 import { Rule } from "antd/es/form";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import { FindUserModel } from "../../models/User";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loading from "../../components/Loading";
 import './login.css';
 import UserService from "../../services/User/UserService";
-import { LoginUserInputModel } from "../../services/User/Models";
 import { useNavigate } from "react-router-dom";
+import { LoginUserInputModel } from "../../services/User/Models";
+import { getUser } from "../../utils/helpers";
 
 const rules: { [key: string]: Rule[] } = {
 
@@ -31,8 +32,14 @@ const rules: { [key: string]: Rule[] } = {
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+      useEffect(() => {
+         const user = getUser();
+    
+         if (user == null) {
+          navigate("/site")
+        }
+      }, );
 
   const onFinish = async (values: FindUserModel) => {
     console.log(values);
@@ -41,6 +48,7 @@ const Login = () => {
       email: values.email,
       password: values.password,
     };
+
     try {
       await UserService.login(findUser);
       message.success('Successfully registered');
@@ -58,7 +66,7 @@ const Login = () => {
     console.log('error', message);
     // message.error(message)
   };
- 
+
   return (
     <Form
       className="login-page"
@@ -90,6 +98,5 @@ const Login = () => {
     </Form>
   );
 };
-
 export default Login;
 

@@ -1,14 +1,18 @@
 import { Input, Form, Button } from "antd";
-import './site.css';
+import "./site.css";
 
-function App() {
+function Site() {
+
   return (
-    <Form>
+    <Form 
+    className="site-page">
       <Form.Item>
+        <Button  htmlType="submit">Logout</Button>
         <Input />
         <Button htmlType="submit">Buying Car</Button>
+        <Button htmlType="submit">Add to Basket</Button>
       </Form.Item>
     </Form>
     )
  }
- export default App;
+ export default Site;

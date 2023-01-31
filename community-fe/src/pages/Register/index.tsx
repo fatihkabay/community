@@ -9,13 +9,14 @@ import {
 import { Rule } from "antd/es/form";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import { CreateUserModel } from "../../models/User";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loading from "../../components/Loading";
 import './register.css';
 import UserService from "../../services/User/UserService";
 import { RegisterUserInputModel } from "../../services/User/Models";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import { getUser } from "../../utils/helpers";
 
 const rules: { [key: string]: Rule[] } = {
   firstName: [
@@ -50,9 +51,14 @@ const rules: { [key: string]: Rule[] } = {
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
+  useEffect(() => {
+     const user = getUser();
 
+     if (user == null) {
+      navigate("/register")
+    }
+  }, []);
   const onFinish = async (values: CreateUserModel) => {
     setLoading(true);
     const newUser: RegisterUserInputModel = {
@@ -63,7 +69,7 @@ const Register = () => {
       birthday: dayjs(values.birthday).valueOf(),
       gender: values.gender,
     };
-
+    
     try {
       await UserService.register(newUser);
       message.success('Successfully registered');
