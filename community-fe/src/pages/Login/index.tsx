@@ -37,7 +37,7 @@ const Login = () => {
          const user = getUser();
     
          if (user != null) {
-          navigate("/site")
+          navigate("/")
         }
       }, );
 
@@ -54,7 +54,7 @@ const Login = () => {
       message.success('Successfully login');
       setTimeout(() => {
         setLoading(false);
-        navigate("/site")
+        navigate("/")
       }, 1500);
     }
      catch (error) {

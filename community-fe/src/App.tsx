@@ -1,18 +1,17 @@
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Site from "./pages/Site";
 import { Routes, Route } from "react-router-dom";
 import './index';
+import DefaultLayout from "./layouts/DefaultLayout";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/site" element={<Site />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />  
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<DefaultLayout><Home /></DefaultLayout>} />
       </Routes>
     </div>
 

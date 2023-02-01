@@ -6,13 +6,11 @@ export function getUser(): UserModel | undefined {
     
     if (user == null) {
         return undefined;
+        
     }
     else {
         return JSON.parse(user);
     }
-
-    
-    
 }
   
 export function setUser(user: UserModel): void {
