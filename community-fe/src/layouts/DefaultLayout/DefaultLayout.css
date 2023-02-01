@@ -1,0 +1,7 @@
+.home-header {
+   display: flex;
+   align-items: center;
+   width: 100vw;
+   height: 100px;
+   background-color: #BDBDBD;
+}

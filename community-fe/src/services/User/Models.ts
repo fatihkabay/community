@@ -7,7 +7,6 @@ export interface RegisterUserInputModel {
     birthday: number;
 }
 
-
 export interface UserModel {
     id: number;
     name: string;

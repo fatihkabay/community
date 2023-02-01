@@ -4,6 +4,8 @@ import {
     PieChartOutlined,
     TeamOutlined,
     UserOutlined,
+    LaptopOutlined,
+    NotificationOutlined
   } from '@ant-design/icons';
   import type { MenuProps } from 'antd';
 
@@ -34,5 +36,6 @@ const items: MenuItem[] = [
   getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
   getItem('Files', '9', <FileOutlined />),
 ];
+
 
 export default items;

@@ -1,12 +1,23 @@
 import { PropsWithChildren, useState } from 'react';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme, Button } from 'antd';
 import items from './MenuItems';
+import "./DefaultLayout.css";
+import { clearStorage } from '../../utils/helpers';
+import { useNavigate } from 'react-router-dom';
 
-const { Header, Content, Footer, Sider } = Layout;
+const {Header, Content, Footer, Sider } = Layout;
 
 interface Props {}
 
 const DefaultLayout = (props: PropsWithChildren<Props>) => {
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    clearStorage();
+    navigate("/login");
+  }
+
+  
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -15,13 +26,22 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <img src='./logo.png' style={{ width:165, height: 70, margin: 16}} />
+        
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
       <Layout className="site-layout">
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: '0 16px' }}>
-          <div style={{ padding: 24, minHeight: 685, background: colorBgContainer }}>
+      <Header>
+        <div className="logo" />
+        <Button onClick={onLogout}>Logout</Button>
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['2']} 
+        />
+        </Header>
+        
+        <Content>
+          <div style={{ padding: 24, minHeight: 655, background: colorBgContainer }}>
             {props.children}
           </div>
         </Content>
@@ -32,3 +52,6 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
 };
 
 export default DefaultLayout;
+
+
+ 

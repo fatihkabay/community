@@ -14,7 +14,7 @@ import './login.css';
 import UserService from "../../services/User/UserService";
 import { useNavigate } from "react-router-dom";
 import { LoginUserInputModel } from "../../services/User/Models";
-import { getUser } from "../../utils/helpers";
+import { getUser, setUser } from "../../utils/helpers";
 
 const rules: { [key: string]: Rule[] } = {
 
@@ -35,14 +35,12 @@ const Login = () => {
     const navigate = useNavigate();
       useEffect(() => {
          const user = getUser();
-    
          if (user != null) {
           navigate("/")
         }
-      }, );
+      }, []);
 
   const onFinish = async (values: FindUserModel) => {
-    console.log(values);
     setLoading(true);
     const findUser: LoginUserInputModel = {
       email: values.email,
@@ -50,7 +48,8 @@ const Login = () => {
     };
 
     try {
-      await UserService.login(findUser);
+      const res = await UserService.login(findUser);
+      setUser(res);
       message.success('Successfully login');
       setTimeout(() => {
         setLoading(false);
@@ -63,7 +62,7 @@ const Login = () => {
     
   };
   const onFinishFailed = (error: ValidateErrorEntity<any>) => {
-    console.log('error', message);
+    console.error('error', message);
     // message.error(message)
   };
 
@@ -94,6 +93,7 @@ const Login = () => {
           <Button htmlType="submit">
             Login
           </Button>
+          <a href="/register"> or Create a new account</a>
       </div>
     </Form>
   );

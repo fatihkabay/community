@@ -85,7 +85,7 @@ const Register = () => {
   };
 
   const onFinishFailed = (error: ValidateErrorEntity<any>) => {
-    console.log('error', message);
+    console.error('error', message);
     // message.error(message)
   };
 

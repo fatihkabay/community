@@ -1,12 +1,10 @@
 import { UserModel } from "../services/User/Models";
 
 export function getUser(): UserModel | undefined {
-    const user = localStorage.getItem(JSON.stringify('user'));
-    console.log(user);
-    
+    const user = localStorage.getItem('user');
+    console.log('helper', user);
     if (user == null) {
         return undefined;
-        
     }
     else {
         return JSON.parse(user);

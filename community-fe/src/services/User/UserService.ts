@@ -11,5 +11,4 @@ class UserService {
         return res.data;
     }
 }
-
 export default new UserService();
