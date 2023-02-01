@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { MenuProps, theme } from 'antd';
+import { MenuProps } from 'antd';
 import { Menu } from 'antd';
+import { clearStorage } from '../../utils/helpers';
+import { useNavigate } from 'react-router-dom';
+
 
 const items: MenuProps['items'] = [
   {
@@ -50,18 +53,21 @@ const items: MenuProps['items'] = [
     ],
   },
   {
-    label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        Navigation Four - Link
-      </a>
-    ),
+    label: 'Logout',
     key: 'alipay',
   },
 ];
 
-const App: React.FC = () => {
+const Site: React.FC = () => {
   const [current, setCurrent] = useState('mail');
+  const navigate = useNavigate();
+  useEffect(() => {
+     const user = clearStorage();
 
+     if (user != null) {
+      navigate("/login")
+    }
+  }, );
   const onClick: MenuProps['onClick'] = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
@@ -70,4 +76,4 @@ const App: React.FC = () => {
   return <Menu onClick={onClick} theme={'dark'} selectedKeys={[current]} mode="horizontal" items={items} />;
 };
 
-export default App;
+export default Site;
