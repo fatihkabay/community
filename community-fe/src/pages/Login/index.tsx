@@ -36,7 +36,7 @@ const Login = () => {
       useEffect(() => {
          const user = getUser();
     
-         if (user == null) {
+         if (user != null) {
           navigate("/site")
         }
       }, );
@@ -51,7 +51,7 @@ const Login = () => {
 
     try {
       await UserService.login(findUser);
-      message.success('Successfully registered');
+      message.success('Successfully login');
       setTimeout(() => {
         setLoading(false);
         navigate("/site")
