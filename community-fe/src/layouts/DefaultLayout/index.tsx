@@ -57,7 +57,7 @@ const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOu
       <Header className="header">
           <img className='logo' src="./logo.png" alt="" />
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} />
-        <Button onClick={onLogout}>Logout</Button>
+        <Button className='logout-button' onClick={onLogout}>Logout</Button>
       </Header>
       <Layout>
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
@@ -84,7 +84,7 @@ const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOu
               background: colorBgContainer,
             }}
           >
-            <div style={{ padding: 24, minHeight: 605, background: colorBgContainer }}>
+            <div style={{ padding: 10, minHeight: 605, background: colorBgContainer }}>
             {props.children}
           </div>
           </Content> <Footer style={{ textAlign: 'center' }}>Community ©2023 Created by Fatih Kabay</Footer>

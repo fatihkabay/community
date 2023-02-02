@@ -7,7 +7,7 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
-   padding-inline: 0;;
+   padding-inline: 0;
 }
 
 #components-layout-demo-top-side-2 .logo {
@@ -21,6 +21,14 @@
  .ant-row-rtl #components-layout-demo-top-side-2 .logo {
    float: right;
    margin: 16px 0 16px 24px;
+ }
+
+ :where(.css-dev-only-do-not-override-1n7nwfa).ant-layout .ant-layout-header{
+   padding-inline: 0;
+ }
+
+ .logout-button {
+   margin: 25px;
  }
 
 
