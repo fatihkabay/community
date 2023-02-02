@@ -1,57 +1,98 @@
 import { PropsWithChildren, useState } from 'react';
-import { Layout, Menu, theme, Button } from 'antd';
+import {Breadcrumb, Layout, Menu, theme, Button } from 'antd';
 import items from './MenuItems';
 import "./DefaultLayout.css";
 import { clearStorage } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { getUser } from '../../utils/helpers';
 
 const {Header, Content, Footer, Sider } = Layout;
 
 interface Props {}
 
+
 const DefaultLayout = (props: PropsWithChildren<Props>) => {
   const navigate = useNavigate();
-
+const user = getUser();
   const onLogout = () => {
     clearStorage();
     navigate("/login");
   }
 
-  
+  const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
+  key,
+  label: `nav ${key}`,
+}));
+
+const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
+  (icon, index) => {
+    const key = String(index + 1);
+
+    return {
+      key: `sub${key}`,
+      icon: React.createElement(icon),
+      label: `subnav ${key}`,
+
+      children: new Array(4).fill(null).map((_, j) => {
+        const subKey = index * 4 + j + 1;
+        return {
+          key: subKey,
+          label: `option${subKey}`,
+        };
+      }),
+    };
+  },
+);
+
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Layout className="site-layout">
-      <Header className='header'>
-        <img className='logo' src="./logo.png" alt="" />
+    <Layout>
+      <Header className="header">
+          <img className='logo' src="./logo.png" alt="" />
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} />
         <Button onClick={onLogout}>Logout</Button>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']} 
-        />
-        </Header>
-        
-        <Content>
-          <div style={{ padding: 24, minHeight: 655, background: colorBgContainer }}>
+      </Header>
+      <Layout>
+        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+     
+          <Menu
+            mode="inline"
+            theme='dark'
+            defaultSelectedKeys={['1']}
+            defaultOpenKeys={['sub1']}
+            style={{ height: '100%', borderRight: 0 }}
+            items={items2}
+          />
+        </Sider>
+        <Layout style={{ padding: '0 24px 24px' }}>
+        <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>{user!.name}</Breadcrumb.Item>
+            <Breadcrumb.Item>{user!.lastname}</Breadcrumb.Item>
+          </Breadcrumb>
+          <Content
+            style={{
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+              background: colorBgContainer,
+            }}
+          >
+            <div style={{ padding: 24, minHeight: 605, background: colorBgContainer }}>
             {props.children}
           </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Community ©2023 Created by Fatih Kabay</Footer>
+          </Content> <Footer style={{ textAlign: 'center' }}>Community ©2023 Created by Fatih Kabay</Footer>
+        </Layout>
+       
       </Layout>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-      </Sider>
     </Layout>
+
   );
 };
-
 export default DefaultLayout;
-
-
- 

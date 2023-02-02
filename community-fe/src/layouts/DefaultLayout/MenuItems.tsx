@@ -4,8 +4,7 @@ import {
     PieChartOutlined,
     TeamOutlined,
     UserOutlined,
-    LaptopOutlined,
-    NotificationOutlined
+    
   } from '@ant-design/icons';
   import type { MenuProps } from 'antd';
 

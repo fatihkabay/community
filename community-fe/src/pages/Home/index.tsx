@@ -16,7 +16,7 @@ const Home = () => {
   else
     return (
       <div className="home-page">
-        <p className="description">{user.name + user.lastname}</p>
+        
         <h1>Home Page</h1>
         <p className="description">
           Hello, you have successfully logged into our site.
