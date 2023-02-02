@@ -1,27 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getUser } from "../../utils/helpers";
-import "./home.css"
+import "./home.css";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
- const navigate = useNavigate();
+  const user = getUser();
+  const navigate = useNavigate();
   useEffect(() => {
-    const user = getUser();
-    console.log(user);
-     if(user == null) {
-      navigate("/login")
-     }
+    if (user == null) {
+      navigate("/login");
+    }
   }, []);
 
-  return (
-    <div className="home-page">
-      Home Page
-      <p className="description">
-      Hello, you have successfully logged into our site. 
-     </p> 
-
-    </div>
-  );
+  if (user == null) return <></>;
+  else
+    return (
+      <div className="home-page">
+        Home Page
+        <p className="description">
+          Hello, you have successfully logged into our site.
+        </p>
+        <p className="description">{user.name + user.lastname}</p>
+      </div>
+    );
 };
 
 export default Home;

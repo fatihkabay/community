@@ -5,3 +5,14 @@
    height: 100px;
    background-color: #BDBDBD;
 }
+
+.logo {
+   width: 100px;
+   height: 65px;
+}
+
+.header { 
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}

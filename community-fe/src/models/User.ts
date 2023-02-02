@@ -1,4 +1,4 @@
-export interface CreateUserModel {
+export interface RegisterUserModel {
   firstName: string;
   lastName: string;
   email: string;
@@ -7,7 +7,17 @@ export interface CreateUserModel {
   gender: string;
 }
 
-export interface FindUserModel {
+export interface LoginUserModel {
   email: string;
   password: string;
+}
+
+
+export interface UserModel {
+  id: number;
+  name: string;
+  lastname: string;
+  email: string;
+  gender: string;
+  birthday: number;
 }

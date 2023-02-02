@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import { Rule } from "antd/es/form";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
-import { CreateUserModel } from "../../models/User";
+import { RegisterUserModel } from "../../models/User";
 import { useState, useEffect } from "react";
 import Loading from "../../components/Loading";
 import './register.css';
@@ -59,7 +59,7 @@ const Register = () => {
       navigate("/register")
     }
   }, []);
-  const onFinish = async (values: CreateUserModel) => {
+  const onFinish = async (values: RegisterUserModel) => {
     setLoading(true);
     const newUser: RegisterUserInputModel = {
       name: values.firstName,
@@ -140,6 +140,7 @@ const Register = () => {
           <Button htmlType="submit">
             Register
           </Button>
+          <a href="/login">or login with a new account</a>
         </Form.Item>
       </div>
     </Form>

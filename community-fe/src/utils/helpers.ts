@@ -1,4 +1,4 @@
-import { UserModel } from "../services/User/Models";
+import { UserModel } from "../models/User";
 
 export function getUser(): UserModel | undefined {
     const user = localStorage.getItem('user');

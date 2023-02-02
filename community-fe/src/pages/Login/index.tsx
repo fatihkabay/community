@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import { Rule } from "antd/es/form";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
-import { FindUserModel } from "../../models/User";
+import { LoginUserModel } from "../../models/User";
 import { useState, useEffect } from "react";
 import Loading from "../../components/Loading";
 import './login.css';
@@ -40,7 +40,7 @@ const Login = () => {
         }
       }, []);
 
-  const onFinish = async (values: FindUserModel) => {
+  const onFinish = async (values: LoginUserModel) => {
     setLoading(true);
     const findUser: LoginUserInputModel = {
       email: values.email,

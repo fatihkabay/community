@@ -25,13 +25,9 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-      </Sider>
       <Layout className="site-layout">
-      <Header>
-        <div className="logo" />
+      <Header className='header'>
+        <img className='logo' src="./logo.png" alt="" />
         <Button onClick={onLogout}>Logout</Button>
         <Menu
           theme="dark"
@@ -47,6 +43,10 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
         </Content>
         <Footer style={{ textAlign: 'center' }}>Community ©2023 Created by Fatih Kabay</Footer>
       </Layout>
+      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+      </Sider>
     </Layout>
   );
 };
