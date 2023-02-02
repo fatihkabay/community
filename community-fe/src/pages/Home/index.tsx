@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getUser } from "../../utils/helpers";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
