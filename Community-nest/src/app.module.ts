@@ -4,10 +4,13 @@ import { AppService } from "./app.service";
 import { UserModule } from "./provider/user/user.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "./entity/user.entity";
+import { Car } from "./entity/car.entity";
+import { CarModule } from "./provider/car/car.module";
 
 @Module({
   imports: [
     UserModule,
+    CarModule,
     TypeOrmModule.forRoot({
       type: "postgres",
       host: "localhost",
@@ -15,7 +18,7 @@ import { User } from "./entity/user.entity";
       username: "postgres",
       password: "postgres",
       database: "CommunityDB",
-      entities: [User],
+      entities: [User, Car],
       synchronize: true,
       autoLoadEntities: true,
     }),
