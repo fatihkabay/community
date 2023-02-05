@@ -2,8 +2,8 @@ import { UserModel } from "../models/User";
 
 export function getUser(): UserModel | undefined {
     const user = localStorage.getItem('user');
-    console.log('helper', user);
-    if (user == null) {
+    console.log('user', user);
+    if (user === null) {
         return undefined;
     }
     else {

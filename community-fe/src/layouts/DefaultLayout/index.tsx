@@ -15,12 +15,11 @@ interface Props {}
 
 const DefaultLayout = (props: PropsWithChildren<Props>) => {
   const navigate = useNavigate();
-const user = getUser();
   const onLogout = () => {
     clearStorage();
     navigate("/login");
   }
-
+  
   const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
   key,
   label: `nav ${key}`,
@@ -51,10 +50,8 @@ const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOu
     token: { colorBgContainer },
   } = theme.useToken();
 
-  if (user == undefined) {
-    console.error(user)
-    return<></>
-  }
+  
+const user = getUser();
 
   return (
     <Layout>
@@ -76,10 +73,10 @@ const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOu
           />
         </Sider>
         <Layout style={{ padding: '0 24px 24px' }}>
-        {/* <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>{user!.name}</Breadcrumb.Item>
-            <Breadcrumb.Item>{user!.lastname}</Breadcrumb.Item>
-          </Breadcrumb> */}
+         { <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>{user?.name}</Breadcrumb.Item>
+            <Breadcrumb.Item>{user?.lastname}</Breadcrumb.Item>
+          </Breadcrumb> } 
           <Content
             style={{
               padding: 24,

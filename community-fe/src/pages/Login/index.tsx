@@ -36,9 +36,13 @@ const Login = () => {
       useEffect(() => {
          const user = getUser();
          if (user != null) {
-          navigate("/")
+          
+          setTimeout(() => {
+            setLoading(false);
+            navigate("/");
+          }, 1500)
         }
-      }, []);
+      }, );
 
   const onFinish = async (values: LoginUserModel) => {
     setLoading(true);
