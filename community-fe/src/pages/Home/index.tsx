@@ -10,7 +10,7 @@ const Home = () => {
     if (user == null) {
       navigate("/login");
     }
-  }, []);
+  }, );
 
   if (user == null) return <></>;
   else

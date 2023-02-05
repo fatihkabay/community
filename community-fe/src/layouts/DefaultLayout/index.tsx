@@ -1,6 +1,5 @@
 import { PropsWithChildren, useState } from 'react';
 import {Breadcrumb, Layout, Menu, theme, Button } from 'antd';
-import items from './MenuItems';
 import "./DefaultLayout.css";
 import { clearStorage } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
@@ -52,6 +51,11 @@ const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOu
     token: { colorBgContainer },
   } = theme.useToken();
 
+  if (user == undefined) {
+    console.error(user)
+    return<></>
+  }
+
   return (
     <Layout>
       <Header className="header">
@@ -72,10 +76,10 @@ const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOu
           />
         </Sider>
         <Layout style={{ padding: '0 24px 24px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
+        {/* <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>{user!.name}</Breadcrumb.Item>
             <Breadcrumb.Item>{user!.lastname}</Breadcrumb.Item>
-          </Breadcrumb>
+          </Breadcrumb> */}
           <Content
             style={{
               padding: 24,
