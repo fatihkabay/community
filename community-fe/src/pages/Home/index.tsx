@@ -1,19 +1,34 @@
 import { useEffect } from "react";
-import { getUser } from "../../utils/helpers";
+import { getCar, getUser } from "../../utils/helpers";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
-import { Input, Form, Button } from "antd";
+import { Input, Form, Button, message } from "antd";
 import { Rule } from "antd/es/form";
+import { useState } from "react";
 
 const Home = () => {
   const user = getUser();
   const navigate = useNavigate();
   useEffect(() => {
     if (user == null) {
-      navigate("/login");
+      setTimeout(() => {
+       setLoading(false);
+       navigate("/login");
+      }, 1500)
     }
   }, );
-
+ const [loading, setLoading] = useState(false);
+    const car = getCar();
+    const purchaseCar = () => {
+      
+      if (car != null) {
+     setTimeout(() => {
+       setLoading(false);
+       message.success("Localstorage added successfully")
+      }, 1500)
+   }
+ }
+    
   if (user == null) return <></>;
   const rules: { [key: string]: Rule[] } = {
 
@@ -37,6 +52,7 @@ const Home = () => {
       { type: "number", warningOnly: true },
     ]
   };
+ 
     return (
       <Form className="home-page">
         <Form.Item name="Brand" rules={rules.brand} className="brans">
@@ -55,7 +71,7 @@ const Home = () => {
           <Input
             placeholder="Year"
             type="text"
-          />
+/>
         </Form.Item>
         <Form.Item name="Kilometer" rules={rules.kilometer} className="Kilometer">
           <Input
@@ -64,11 +80,8 @@ const Home = () => {
           />
         </Form.Item>
         <Form.Item className="home-buttons">
-          <Button htmlType="submit">
+          <Button onClick={purchaseCar} htmlType="submit">
             Get
-          </Button>
-          <Button htmlType="submit">
-            Sell
           </Button>
         </Form.Item>
       </Form>

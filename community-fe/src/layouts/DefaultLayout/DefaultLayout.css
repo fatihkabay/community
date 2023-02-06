@@ -5,9 +5,7 @@
 
 .header { 
    display: flex;
-   align-items: center;
-   justify-content: space-between;
-   padding-inline: 0;
+   justify-content: space-between
 }
 
 #components-layout-demo-top-side-2 .logo {
@@ -28,9 +26,29 @@
  }
 
  .logout-button {
-   margin: 25px;
-   transition: color 0.3s;
-   box-sizing: border-box;
- }
+   color: #f00;
+  }
 
+  .logout-button:hover { 
+    color: #f00;
+  }
 
+  .button { 
+   width: 75px;
+   border: 0;
+   border-radius: 0;
+   height: 64px;
+   margin:0 20px;
+   background-color: transparent;
+   text-decoration: dashed;
+  }
+
+  .toggle-button { 
+    color: #fff;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: end; 
+
+  }
