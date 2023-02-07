@@ -44,12 +44,12 @@ const Home = () => {
     ],
     year: [
       { required: true },
-      { type: "number", warningOnly: true },
-      {  min: 4, max:4},
+      { pattern: new RegExp(/^[0-9]+$/), warningOnly: true },
+      { min: 4, max:4,  },
     ],
     kilometer: [
       { required: false },
-      { type: "number", warningOnly: true },
+      { pattern: new RegExp(/^([-]?[1-9][0-9]*|0)$/), warningOnly: true },
     ]
   };
  
@@ -70,7 +70,6 @@ const Home = () => {
         <Form.Item name="Year" rules={rules.year} className="Year">
           <Input
             placeholder="Year"
-            type="text"
 />
         </Form.Item>
         <Form.Item name="Kilometer" rules={rules.kilometer} className="Kilometer">
