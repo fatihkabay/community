@@ -1,15 +1,16 @@
 export interface GetCarInputModel {
     id: number;
-    brand: string;
-    model: string;
-    year: number;
-    kilometer: number;
+    UserId: number;
+    Brand: string;
+    Model: string;
+    Year: number;
+    Kilometer: number;
 }
 
 export interface CarOutputModel {
     UserId: number;
-    brand: string;
-    model: string;
-    year: number;
-    kilometer: number;
+    Brand: string;
+    Model: string;
+    Year: number;
+    Kilometer: number;
 }

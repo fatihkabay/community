@@ -1,17 +1,15 @@
 export interface CarModel {
     id: number;
-    name: string;
-    lastname: string;
-    email: string;
-    gender: string;
-    birthday: number;
+    Brand: string;
+    Model: string;
+    Year: number;
+    Kilometer: number;
   }
 
 export interface GetCarModel {
     UserId: number;
-    name: string;
-    lastname: string; 
-    email: string;
-    gender: string;
-    birthday: number;
+    Brand: string;
+    Model: string;
+    Year: number;
+    Kilometer: number;
 }

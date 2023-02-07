@@ -29,10 +29,10 @@ const user = getUser();
     <Layout>
       <Header className="header">
           <img className='logo' src="./logo.png" alt="" />
-          <div className="buttons">
+          <div className="header-buttons">
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}  />
-        <Button className='button toggle-button'>Nav</Button>
-        <Button className='button logout-button' onClick={onLogout}>Logout</Button>
+        <Button className='header-button header-toggle-button'>Nav</Button>
+        <Button className='header-button header-logout-button' onClick={onLogout}>Logout</Button>
         </div>
       </Header>
       <Layout>
@@ -43,7 +43,11 @@ const user = getUser();
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
             style={{ height: '100%', borderRight: 0 }}
-          />
+          >
+          <Button className='sider-buttons'>Nav</Button>
+          <Button className='sider-buttons'>Nav</Button>
+          <Button className='sider-buttons'>Nav</Button>
+          </Menu>
         </Sider>
         <Layout style={{ padding: '0 24px 24px' }}>
          { <Breadcrumb style={{ margin: '16px 0' }}>
