@@ -1,5 +1,4 @@
 export interface GetCarInputModel {
-    id: number;
     UserId: number;
     Brand: string;
     Model: string;
@@ -8,7 +7,7 @@ export interface GetCarInputModel {
 }
 
 export interface CarOutputModel {
-    UserId: number;
+    Id: number;
     Brand: string;
     Model: string;
     Year: number;
