@@ -45,13 +45,15 @@ const Home = () => {
     }
   }, );
  const [loading, setLoading] = useState(false);
-    const car = getCar();
+    useEffect(() => {
+      const car = getCar();
       if (car != null) {
      setTimeout(() => {
        setLoading(false);
       }, 1500)
    }
-
+    })
+    
     const onFinish = async (carsInfo: GetCarInputModel) => {
     setLoading(true);
     const newCar: GetCarInputModel = {
