@@ -57,7 +57,7 @@ const Register = () => {
      if (user == null) {
       navigate("/register")
     }
-  }, );
+  }, [1]);
   const onFinish = async (values: RegisterUserModel) => {
     setLoading(true);
     const newUser: RegisterUserInputModel = {
@@ -84,8 +84,7 @@ const Register = () => {
   };
 
   const onFinishFailed = (error: ValidateErrorEntity<any>) => {
-    console.error('error', message);
-    // message.error(message)
+    console.error(error, message);
   };
 
   return (

@@ -46,36 +46,30 @@ const Home = () => {
   }, );
  const [loading, setLoading] = useState(false);
     const car = getCar();
-    const purchaseCar = () => {
-      
       if (car != null) {
      setTimeout(() => {
        setLoading(false);
-       message.success("Localstorage added successfully")
       }, 1500)
    }
- }
 
     const onFinish = async (carsInfo: GetCarInputModel) => {
     setLoading(true);
-    const findUser: GetCarInputModel = {
-      UserId: carsInfo.UserId,
+    const newCar: GetCarInputModel = {
       Brand: carsInfo.Brand,
       Model: carsInfo.Model,
       Year: carsInfo.Year,
       Kilometer: carsInfo.Kilometer,
     };
   
-
-    
-
   try {
-    const res = await CarService.get(findUser);
+    const res = await CarService.get(newCar);
     setCar(res);
-    message.success('Successfully car');
+    setLoading(false);
+    message.success('Successfully purchase car');
   }
    catch (error) {
     message.error('Not Found');
+    setLoading(false);
   }
 }
 const onFinishFailed = (error: ValidateErrorEntity<any>) => {
@@ -113,7 +107,7 @@ const onFinishFailed = (error: ValidateErrorEntity<any>) => {
           />
         </Form.Item>
         <Form.Item className="home-buttons">
-          <Button onClick={purchaseCar} htmlType="submit">
+          <Button htmlType="submit">
             Get
           </Button>
         </Form.Item>

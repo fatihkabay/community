@@ -9,8 +9,8 @@ const {Header, Content, Footer, Sider } = Layout;
 
 interface Props {}
 
-
 const DefaultLayout = (props: PropsWithChildren<Props>) => {
+  const user = getUser();
   const navigate = useNavigate();
   const onLogout = () => {
     clearStorage();
@@ -21,9 +21,6 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
-  
-const user = getUser();
 
   return (
     <Layout>

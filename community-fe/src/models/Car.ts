@@ -1,5 +1,6 @@
 export interface CarModel {
     Id: number;
+    UserId: number;
     Brand: string;
     Model: string;
     Year: number;
@@ -7,7 +8,6 @@ export interface CarModel {
   }
 
 export interface GetCarModel {
-    UserId: number;
     Brand: string;
     Model: string;
     Year: number;

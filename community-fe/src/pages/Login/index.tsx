@@ -62,6 +62,7 @@ const Login = () => {
     }
      catch (error) {
       message.error('Not Found');
+      setLoading(false);
     }
     
   };
