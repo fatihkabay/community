@@ -1,10 +1,37 @@
 import { useEffect } from "react";
-import { getCar, getUser } from "../../utils/helpers";
+import { getCar, getUser, setCar } from "../../utils/helpers";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
 import { Input, Form, Button, message } from "antd";
 import { Rule } from "antd/es/form";
 import { useState } from "react";
+import CarService from "../../services/Car/CarService";
+import { GetCarInputModel } from "../../services/Car/Models";
+import { ValidateErrorEntity } from "rc-field-form/lib/interface";
+import Loading from "../../components/Loading";
+
+const rules: { [key: string]: Rule[] } = {
+
+    brand: [
+      { required: true },
+      { type: "string", warningOnly: true },
+      { type: "string", min: 3, max: 50 },
+    ],
+    model: [
+      { required: true },
+      { type: "string", warningOnly: true },
+      { type: "string", min: 2, max: 50 },
+    ],
+    year: [
+      { required: true },
+      { pattern: new RegExp(/^[0-9]+$/), warningOnly: true },
+      { min: 4, max:4, },
+    ],
+    kilometer: [
+      { required: false },
+      { pattern: new RegExp(/^([-]?[1-9][0-9]*|0)$/), warningOnly: true },
+    ]
+  };
 
 const Home = () => {
   const user = getUser();
@@ -28,34 +55,41 @@ const Home = () => {
       }, 1500)
    }
  }
-    
-  if (user == null) return <></>;
-  const rules: { [key: string]: Rule[] } = {
 
-    brand: [
-      { required: true },
-      { type: "string", warningOnly: true },
-      { type: "string", min: 3, max: 50 },
-    ],
-    model: [
-      { required: true },
-      { type: "string", warningOnly: true },
-      { type: "string", min: 2, max: 50 },
-    ],
-    year: [
-      { required: true },
-      { pattern: new RegExp(/^[0-9]+$/), warningOnly: true },
-      { min: 4, max:4,  },
-    ],
-    kilometer: [
-      { required: false },
-      { pattern: new RegExp(/^([-]?[1-9][0-9]*|0)$/), warningOnly: true },
-    ]
-  };
- 
-    return (
-      <Form className="home-page">
-        <Form.Item name="Brand" rules={rules.brand} className="brans">
+    const onFinish = async (carsInfo: GetCarInputModel) => {
+    setLoading(true);
+    const findUser: GetCarInputModel = {
+      UserId: carsInfo.UserId,
+      Brand: carsInfo.Brand,
+      Model: carsInfo.Model,
+      Year: carsInfo.Year,
+      Kilometer: carsInfo.Kilometer,
+    };
+  
+
+    
+
+  try {
+    const res = await CarService.get(findUser);
+    setCar(res);
+    message.success('Successfully car');
+  }
+   catch (error) {
+    message.error('Not Found');
+  }
+}
+const onFinishFailed = (error: ValidateErrorEntity<any>) => {
+      console.error(error, message);
+    }
+   if (user == null) return <></>;
+
+    return(
+      <Form className="home-page"
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      >
+        {loading && <Loading />}
+        <Form.Item name="Brand" rules={rules.brand} className="Brand">
           <Input
             placeholder="Brand"
             type="text"
@@ -84,7 +118,6 @@ const Home = () => {
           </Button>
         </Form.Item>
       </Form>
-    );
-};
-
+    )
+  };
 export default Home;

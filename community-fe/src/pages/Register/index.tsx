@@ -52,13 +52,12 @@ const rules: { [key: string]: Rule[] } = {
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const user = getUser();
   useEffect(() => {
-     const user = getUser();
-
      if (user == null) {
       navigate("/register")
     }
-  }, []);
+  }, );
   const onFinish = async (values: RegisterUserModel) => {
     setLoading(true);
     const newUser: RegisterUserInputModel = {

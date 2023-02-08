@@ -18,7 +18,7 @@ export function setUser(user: UserModel): void {
 
 export function getCar(): CarModel | undefined {
     const car = localStorage.getItem('car');
-    console.log('car', car);
+    console.log('car', car)
     if (car === null) {
         return undefined;
     }

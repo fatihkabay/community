@@ -14,7 +14,6 @@ function App() {
         <Route path="/" element={<DefaultLayout><Home /></DefaultLayout>} />
       </Routes>
     </div>
-
     )
  }
  export default App;

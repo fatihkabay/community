@@ -66,8 +66,7 @@ const Login = () => {
     
   };
   const onFinishFailed = (error: ValidateErrorEntity<any>) => {
-    console.error('error', message);
-     message.error("error")
+    console.error(error, message);
   };
 
   return (
