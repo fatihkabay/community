@@ -112,6 +112,12 @@ const onFinishFailed = (error: ValidateErrorEntity<any>) => {
           <Button htmlType="submit">
             Get
           </Button>
+          <Button>
+            Delete
+          </Button>
+          <Button>
+            Update
+          </Button>
         </Form.Item>
       </Form>
     )
