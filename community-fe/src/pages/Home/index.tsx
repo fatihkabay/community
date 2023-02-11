@@ -9,7 +9,7 @@ import CarService from "../../services/Car/CarService";
 import { GetCarInputModel } from "../../services/Car/Models";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Loading from "../../components/Loading";
-import { deleteStorage } from "../../utils/helpers"
+import { deleteStorage, updateStorage } from "../../utils/helpers"
 
 const rules: { [key: string]: Rule[] } = {
 
@@ -82,6 +82,10 @@ const Home = () => {
     const deleteCar = () => {
        deleteStorage();
     }
+    
+    const updateCar = () => {
+      updateStorage();
+    }
 
    if (user == null) return <></>;
 
@@ -121,7 +125,7 @@ const Home = () => {
           <Button onClick={deleteCar}>
             Delete
           </Button>
-          <Button>
+          <Button onClick={updateCar}>
             Update
           </Button>
         </Form.Item>

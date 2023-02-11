@@ -10,7 +10,7 @@ export function getUser(): UserModel | undefined {
         return JSON.parse(user);
     }
 }
-  
+
 export function setUser(user: UserModel): void {
     localStorage.setItem('user', JSON.stringify(user));
 }
@@ -35,4 +35,10 @@ export function clearStorage() {
 
 export function deleteStorage() {
     localStorage.removeItem('car');
+}
+
+export function updateStorage() {
+    localStorage.setIn([0, "build_id"]);
+
+
 }
