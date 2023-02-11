@@ -9,6 +9,7 @@ import CarService from "../../services/Car/CarService";
 import { GetCarInputModel } from "../../services/Car/Models";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Loading from "../../components/Loading";
+import { deleteStorage } from "../../utils/helpers"
 
 const rules: { [key: string]: Rule[] } = {
 
@@ -74,9 +75,14 @@ const Home = () => {
     setLoading(false);
   }
 }
-const onFinishFailed = (error: ValidateErrorEntity<any>) => {
+   const onFinishFailed = (error: ValidateErrorEntity<any>) => {
       console.error(error, message);
     }
+
+    const deleteCar = () => {
+       deleteStorage();
+    }
+
    if (user == null) return <></>;
 
     return(
@@ -112,7 +118,7 @@ const onFinishFailed = (error: ValidateErrorEntity<any>) => {
           <Button htmlType="submit">
             Get
           </Button>
-          <Button>
+          <Button onClick={deleteCar}>
             Delete
           </Button>
           <Button>
