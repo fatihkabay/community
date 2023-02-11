@@ -3,7 +3,6 @@ import { UserModel } from "../models/User";
 
 export function getUser(): UserModel | undefined {
     const user = localStorage.getItem('user');
-    console.log('user', user);
     if (user === null) {
         return undefined;
     }
@@ -18,7 +17,6 @@ export function setUser(user: UserModel): void {
 
 export function getCar(): CarModel | undefined {
     const car = localStorage.getItem('car');
-    console.log('car', car)
     if (car === null) {
         return undefined;
     }
