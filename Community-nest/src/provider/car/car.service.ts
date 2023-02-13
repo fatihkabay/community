@@ -5,7 +5,7 @@ import { Car } from "../../entity/car.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateCarRequestDto, CarResponseDto } from "src/models/Car";
-
+import { QueryPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
 @Injectable()
 export class CarService {
   constructor(
@@ -29,7 +29,9 @@ export class CarService {
       UserId: carAfterSave.UserId
       
     }
-
     return res;
   }
+  // async updatePost(UserId: number, Post): Promise<any> {
+  //   const updateCar = await this.carRepository.update(UserId, Post);
+  // }
 }
