@@ -65,7 +65,7 @@ const Home = () => {
     };
   
   try {
-    const res = await CarService.get(newCar);
+    const res = await CarService.create(newCar);
     setCar(res);
     setLoading(false);
     message.success('Successfully purchase car');
