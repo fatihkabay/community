@@ -5,7 +5,6 @@ import { Car } from "../../entity/car.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateCarRequestDto, CarResponseDto } from "src/models/Car";
-import { QueryPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
 @Injectable()
 export class CarService {
   constructor(
@@ -13,8 +12,8 @@ export class CarService {
     private carRepository: Repository<Car>,
   ) {}
 
-  async find(UserId: number): Promise<CarResponseDto> {
-    const findCar = await this.find(UserId)  
+  async find(Id: number): Promise<CarResponseDto> {
+    const findCar = await this.find(Id)  
     return findCar;
   }
   
@@ -26,12 +25,15 @@ export class CarService {
       Model: carAfterSave.Model,
       Year: carAfterSave.Year,
       Kilometer: carAfterSave.Kilometer,
-      UserId: carAfterSave.UserId
-      
+      UserId: carAfterSave.UserId,
     }
     return res;
   }
   // async updatePost(UserId: number, Post): Promise<any> {
-  //   const updateCar = await this.carRepository.update(UserId, Post);
-  // }
+  //    const updateCar = await this.carRepository.update(UserId, Post);
+  //  }
+  async deletePost(car: any) {
+     const deleteCar = await this.carRepository.delete(car);
+     return deleteCar;
+  }
 }

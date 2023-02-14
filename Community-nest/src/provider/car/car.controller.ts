@@ -20,7 +20,13 @@ export class CarController {
     return res;
   }
   // @Put('car/update')
-  // async updatePost(@Param("id") UserId: number, Post: number): Promise<CreateCarRequestDto> {
+  // async update(@Param("id") UserId: number, Post: number): Promise<CreateCarRequestDto> {
   //   return this.carService.updatePost(UserId, Post);
   // }
+  @Delete("car/delete")
+  async delete(@Body() car: CreateCarRequestDto): Promise<CarResponseDto> {
+    const res = await this.carService.deletePost(car);
+    return res.raw;
+  }
+
 }
