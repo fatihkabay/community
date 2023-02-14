@@ -8,7 +8,7 @@ class CarService {
     }
 
     async update(updateCar: GetCarInputModel): Promise<CarOutputModel> {
-        const updateC = await axios.put('', updateCar);
+        const updateC = await axios.put('http://localhost:3030/car/car/update', updateCar);
         return updateC.data;
     }
 

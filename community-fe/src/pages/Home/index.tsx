@@ -9,7 +9,6 @@ import CarService from "../../services/Car/CarService";
 import { GetCarInputModel } from "../../services/Car/Models";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Loading from "../../components/Loading";
-import { deleteStorage, updateStorage } from "../../utils/helpers"
 
 const rules: { [key: string]: Rule[] } = {
 
@@ -55,7 +54,7 @@ const Home = () => {
    }
     })
     
-    const onFinish = async (carsInfo: GetCarInputModel) => {
+    const onGetFinish = async (carsInfo: GetCarInputModel) => {
     setLoading(true);
     const newCar: GetCarInputModel = {
       Brand: carsInfo.Brand,
@@ -75,24 +74,55 @@ const Home = () => {
     setLoading(false);
   }
 }
+const onUpdateFinish = async (carsInfo: GetCarInputModel) => {
+  setLoading(true);
+  const updateCar: GetCarInputModel = {
+    Brand: carsInfo.Brand,
+    Model: carsInfo.Model,
+    Year: carsInfo.Year,
+    Kilometer: carsInfo.Kilometer,
+  };
+  try {
+    const res = await CarService.update(updateCar);
+    setCar(res);
+    setLoading(false);
+    message.success("Successfully update car");
+  }
+  catch(error) {
+    message.error("Failed to update vehicle information")
+    setLoading(false);
+  }
+}
+
+const onDeleteFinish = async (carsInfo: GetCarInputModel) => {
+  setLoading(true);
+  const deleteCar: GetCarInputModel = {
+    Brand: carsInfo.Brand,
+    Model: carsInfo.Model,
+    Year: carsInfo.Year,
+    Kilometer: carsInfo.Kilometer,
+  };
+  try {
+    const res = await CarService.deleteCar(deleteCar);
+    setCar(res);
+    setLoading(false);
+    message.success("Successfully delete car");
+  }
+  catch(error) {
+    message.error("Failed to delete vehicle information")
+    setLoading(false);
+  }
+}
    const onFinishFailed = (error: ValidateErrorEntity<any>) => {
       console.error(error, message);
-    }
-
-    const deleteCar = () => {
-       deleteStorage();
-    }
-    
-    const updateCar = () => {
-      updateStorage();
     }
 
    if (user == null) return <></>;
 
     return(
       <Form className="home-page"
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+          onFinish={onDeleteFinish}
+          onFinishFailed={onFinishFailed}
       >
         {loading && <Loading />}
         <Form.Item name="Brand" rules={rules.brand} className="Brand">
@@ -122,10 +152,10 @@ const Home = () => {
           <Button htmlType="submit">
             Get
           </Button>
-          <Button onClick={deleteCar}>
+          <Button htmlType="submit">
             Delete
           </Button>
-          <Button onClick={updateCar}>
+          <Button htmlType="submit">
             Update
           </Button>
         </Form.Item>

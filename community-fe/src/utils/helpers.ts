@@ -32,13 +32,3 @@ export function setCar(car: CarModel): void {
 export function clearStorage() {
     localStorage.clear();
 }
-
-export function deleteStorage() {
-    localStorage.removeItem('car');
-}
-
-export function updateStorage() {
-    localStorage.setIn([0, "build_id"]);
-
-
-}
