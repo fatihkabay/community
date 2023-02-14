@@ -29,9 +29,12 @@ export class CarService {
     }
     return res;
   }
-  // async updatePost(UserId: number, Post): Promise<any> {
-  //    const updateCar = await this.carRepository.update(UserId, Post);
-  //  }
+
+   async updatePost(UserId: number, Post: CreateCarRequestDto): Promise<CarResponseDto> {
+      const updateCar = await this.carRepository.update(UserId, Post);
+      return updateCar.raw;
+    }
+
   async deletePost(car: any) {
      const deleteCar = await this.carRepository.delete(car);
      return deleteCar;
