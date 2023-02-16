@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Delete, Put, Patch } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Delete, Put } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { CreateCarRequestDto, CarResponseDto } from "src/models/Car";
 import { CarService } from "./car.service";
@@ -19,7 +19,7 @@ export class CarController {
     const res = await this.carService.create(car);
     return res;
   }
-   @Patch('car/update')
+   @Put('car/update')
    async update(@Body() UserId: number, Post: CreateCarRequestDto): Promise<CarResponseDto> {
      const res = await this.carService.updatePost(UserId, Post);
      return res;
