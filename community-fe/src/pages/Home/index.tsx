@@ -104,7 +104,7 @@ const onDeleteFinish = async (carsInfo: GetCarInputModel) => {
   };
   try {
     const res = await CarService.deleteCar(deleteCar);
-    setCar(res);
+    console.log("delete car:",res);
     setLoading(false);
     message.success("Successfully delete car");
   }

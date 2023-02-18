@@ -3,7 +3,7 @@ import { CarOutputModel, GetCarInputModel } from '../Car/Models';
 
 class CarService {
     async create(newCar: GetCarInputModel): Promise<CarOutputModel> {
-       const findC = await axios.post('http://localhost:3030/car/car/get', newCar)
+       const findC = await axios.post('http://localhost:3030/car/car/create', newCar)
        return findC.data;
     }
 
@@ -13,7 +13,7 @@ class CarService {
     }
 
     async deleteCar(deleteCar: any) {
-        const deleteC = await axios.delete('http://localhost:3030/car/car/delete',deleteCar)
+        const deleteC = await axios.delete('http://localhost:3030/car/car/delete', deleteCar)
         return deleteC.data;
     }
 }
