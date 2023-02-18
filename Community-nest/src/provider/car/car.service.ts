@@ -2,9 +2,9 @@ import {
   Injectable,
 } from "@nestjs/common";
 import { Car } from "../../entity/car.entity";
-import { Repository } from "typeorm";
+import { DeleteQueryBuilder, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateCarRequestDto, CarResponseDto } from "src/models/Car";
+import { CreateCarRequestDto, CarResponseDto, CarUpdateDto, CarDeleteDto } from "src/models/Car";
 @Injectable()
 export class CarService {
   constructor(
@@ -21,22 +21,20 @@ export class CarService {
     const carAfterSave = await this.carRepository.save(car)
     const res: CarResponseDto = {
       Id: carAfterSave.Id,
+      UserId: carAfterSave.UserId,
       Brand: carAfterSave.Brand,
       Model: carAfterSave.Model,
       Year: carAfterSave.Year,
       Kilometer: carAfterSave.Kilometer,
-      UserId: carAfterSave.UserId,
     }
     return res;
   }
 
-   async updatePost(UserId: number, Post: CreateCarRequestDto): Promise<CarResponseDto> {
-      const updateCar = await this.carRepository.update(UserId, Post);
-      return updateCar.raw;
+   async updatePost(car: CreateCarRequestDto): Promise<CarUpdateDto> {
+      return car;
     }
 
-  async deletePost(car: any) {
-     const deleteCar = await this.carRepository.delete(car);
-     return deleteCar;
+  async deletePost(car: CarResponseDto): Promise<CarDeleteDto> {
+    return car;
   }
 }
