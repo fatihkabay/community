@@ -21,7 +21,7 @@ export class CarController {
   }
   @Put('car/update')
   update(@Param('id') id: number, @Body() updateCatDto: CarUpdateDto) {
-    return `This action updates a #${id}${updateCatDto} cat`;
+    return `This action updates a #${id} cat`;
   }
   @Delete('car/delete')
   remove(@Param('id') id: number) {
