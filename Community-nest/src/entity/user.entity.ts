@@ -25,5 +25,5 @@ export class User {
   Password: string;
 
   @OneToMany(() => Car, (car) => car.User)
-  cars: Car[]
+  cars: Car;
 }

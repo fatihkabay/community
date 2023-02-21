@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { User } from "src/entity/user.entity";
 export class CreateCarRequestDto {
     @ApiProperty()
     Brand: string;
@@ -13,7 +14,7 @@ export class CreateCarRequestDto {
     Kilometer: number;
 
     @ApiProperty()
-    UserId: number;
+    UserId: User;
   }
 
 export class CarResponseDto {
@@ -33,39 +34,6 @@ export class CarResponseDto {
     Kilometer: number;
     
     @ApiProperty()
-    UserId: number;
+    UserId: User;
   }
 
-  export class CarUpdateDto {
-    @ApiProperty()
-    Brand: string;
-  
-    @ApiProperty()
-    Model: string;
-    
-    @ApiProperty()
-    Year: number;
-
-    @ApiProperty()
-    Kilometer: number;
-  }
-
-  export class CarDeleteDto {
-    @ApiProperty()
-    Id: number;
-  
-    @ApiProperty()
-    Brand: string;
-  
-    @ApiProperty()
-    Model: string;
-    
-    @ApiProperty()
-    Year: number;
-
-    @ApiProperty()
-    Kilometer: number;
-    
-    @ApiProperty()
-    UserId: number;
-  }

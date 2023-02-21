@@ -1,16 +1,15 @@
 import { Body, Controller, Get, Param, Post, Delete, Put } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { CreateCarRequestDto, CarResponseDto, CarUpdateDto } from "src/models/Car";
+import { CreateCarRequestDto, CarResponseDto } from "src/models/Car";
 import { CarService } from "./car.service";
-
 @Controller("car")
 @ApiTags("car")
 export class CarController {
   constructor(private readonly carService: CarService) {}
 
-  @Get("get/id")
-  async getCar(@Param("UserId") UserId: number) {
-    const res = await this.carService.find(UserId)
+  @Get(":id")
+  async getUser(@Param("id") id: number) {
+    const res = await this.carService.findOne(id)
     return res;
   }
 
@@ -19,13 +18,14 @@ export class CarController {
     const res = await this.carService.create(car);
     return res;
   }
-  @Put('car/update')
-  update(@Param('id') id: number, @Body() updateCatDto: CarUpdateDto) {
-    return `This action updates a #${id} cat`;
-  }
+  // @Put('car/update')
+  // async update(@Param('id') car: CreateCarRequestDto, @Body() updateCarDto: CarResponseDto) {
+  //   const res = await this.carService.updatePost(car); 
+  //   return res;
+  // }
   @Delete('car/delete')
-  remove(@Param('id') id: number) {
-    return `This action removes a #${id} cat`;
+  async remove(@Param('id') car: CreateCarRequestDto) {
+    const res = await this.carService.deletePost(car);
+    return res;
   }
-
 }

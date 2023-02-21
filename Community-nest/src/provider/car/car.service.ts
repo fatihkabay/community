@@ -2,9 +2,10 @@ import {
   Injectable,
 } from "@nestjs/common";
 import { Car } from "../../entity/car.entity";
-import { DeleteQueryBuilder, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateCarRequestDto, CarResponseDto, CarUpdateDto, CarDeleteDto } from "src/models/Car";
+import { CreateCarRequestDto, CarResponseDto } from "src/models/Car";
+import { NotFoundException } from "@nestjs/common";
 @Injectable()
 export class CarService {
   constructor(
@@ -12,9 +13,30 @@ export class CarService {
     private carRepository: Repository<Car>,
   ) {}
 
-  async find(Id: number): Promise<CarResponseDto> {
-    const findCar = await this.find(Id)  
-    return findCar;
+  private findAll(): Promise<Car[]> {
+    return this.carRepository.find();
+  }
+
+  private convertCarOutputModel(input: Car): CarResponseDto {
+    if (input === null) { 
+      throw new NotFoundException("Car not found");
+    }
+    
+
+    const res: CarResponseDto = {
+      Id: input.Id,
+      UserId: input.User,
+      Brand: input.Brand,
+      Model: input.Model,
+      Kilometer: input.Kilometer,
+      Year: input.Year,
+    }
+    return res;
+  }
+
+  async findOne(Id: number): Promise<CarResponseDto> {
+    const carDbData = await this.carRepository.findOneBy({ Id });
+    return this.convertCarOutputModel(carDbData);
   }
   
   async create(car: CreateCarRequestDto): Promise<CarResponseDto> {
@@ -30,11 +52,12 @@ export class CarService {
     return res;
   }
 
-   async updatePost(car: CreateCarRequestDto): Promise<CarUpdateDto> {
-      return car;
-    }
+  //  async updatePost( car: CreateCarRequestDto): Promise<CarResponseDto>{
+  //   const res = await this.carRepository.update(car)
+  //   return res;
+  //   }
 
-  async deletePost(car: CarResponseDto): Promise<CarDeleteDto> {
+  async deletePost(car: any) {
     return car;
   }
 }
