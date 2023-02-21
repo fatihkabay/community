@@ -8,7 +8,7 @@ export class CarController {
   constructor(private readonly carService: CarService) {}
 
   @Get(":id")
-  async getUser(@Param("id") id: number) {
+  async getCar(@Param("id") id: number) {
     const res = await this.carService.findOne(id)
     return res;
   }
