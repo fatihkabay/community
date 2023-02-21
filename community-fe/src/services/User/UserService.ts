@@ -2,13 +2,13 @@ import axios from "axios";
 import { LoginUserInputModel, RegisterUserInputModel, UserOutputModel } from './Models';
 
 class UserService {
-    async login(findUser: LoginUserInputModel): Promise<UserOutputModel> {
-       const save = await axios.post('http://localhost:3030/user/login', findUser)
+    async login(loginUser: LoginUserInputModel): Promise<UserOutputModel> {
+       const save = await axios.post('http://localhost:3030/user/login', loginUser)
        return save.data;
     }
-    async register(newUser: RegisterUserInputModel): Promise<UserOutputModel> {
-        const res = await axios.post('http://localhost:3030/user/register', newUser);
-        return res.data;
+    async register(registerUser: RegisterUserInputModel): Promise<UserOutputModel> {
+        const create = await axios.post('http://localhost:3030/user/register', registerUser);
+        return create.data;
     }
 }
 export default new UserService();

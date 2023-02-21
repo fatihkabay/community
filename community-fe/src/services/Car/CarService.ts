@@ -3,8 +3,8 @@ import { CarOutputModel, GetCarInputModel } from '../Car/Models';
 
 class CarService {
     async create(newCar: GetCarInputModel): Promise<CarOutputModel> {
-       const findC = await axios.post('http://localhost:3030/car/car/create', newCar)
-       return findC.data;
+       const createCar = await axios.post('http://localhost:3030/car/car/create', newCar)
+       return createCar.data;
     }
 
     async update(updateCar: GetCarInputModel): Promise<CarOutputModel> {

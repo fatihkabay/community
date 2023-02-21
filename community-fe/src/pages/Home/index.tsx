@@ -121,7 +121,7 @@ const onDeleteFinish = async (carsInfo: GetCarInputModel) => {
 
     return(
       <Form className="home-page"
-          onFinish={onDeleteFinish}
+          onFinish={onGetFinish}
           onFinishFailed={onFinishFailed}
       >
         {loading && <Loading />}
