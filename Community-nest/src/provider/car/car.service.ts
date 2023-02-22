@@ -57,7 +57,9 @@ export class CarService {
   //   return res;
   //   }
 
-  async deletePost(car: any) {
-    return car;
+  async remove(id: number): Promise<void> {
+     const res = await this.remove(id);
+     return res;
+
   }
 }

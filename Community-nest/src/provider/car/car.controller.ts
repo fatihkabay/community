@@ -13,19 +13,19 @@ export class CarController {
     return res;
   }
 
-  @Post("car/create")
+  @Post("create")
   async create(@Body() car: CreateCarRequestDto): Promise<CarResponseDto> {
     const res = await this.carService.create(car);
     return res;
   }
-  // @Put('car/update')
-  // async update(@Param('id') car: CreateCarRequestDto, @Body() updateCarDto: CarResponseDto) {
+  // @Put('update')
+  // async update(car: CreateCarRequestDto, @Body() updateCarDto: CarResponseDto) {
   //   const res = await this.carService.updatePost(car); 
   //   return res;
   // }
-  @Delete('car/delete')
-  async remove(@Param('id') car: CreateCarRequestDto) {
-    const res = await this.carService.deletePost(car);
-    return res;
+  @Delete('delete')
+  async remove(@Param('id') id: number): Promise<void> {
+    const res = await this.carService.remove(id);
+    return res; 
   }
 }
