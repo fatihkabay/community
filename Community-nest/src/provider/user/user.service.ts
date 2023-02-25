@@ -3,6 +3,7 @@ import { User } from "../../entity/user.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserRequestDto, LoginRequestDto, UserResponseDto } from "src/models/User";
+import { enCodePassword } from "src/utils/bcrypt";
 @Injectable()
 export class UserService {
   constructor(
@@ -60,6 +61,9 @@ export class UserService {
   }
 
   async login(user: LoginRequestDto): Promise<UserResponseDto> {
+    const Password = enCodePassword(user.password);
+     console.log(Password);
+     this.usersRepository.create({...user, Password})
     const userDbData = await this.usersRepository.findOne({
       where: {
         Email: user.email,
