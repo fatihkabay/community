@@ -62,15 +62,16 @@ export class UserService {
 
   async login(user: LoginRequestDto): Promise<UserResponseDto> {
     const Password = enCodePassword(user.password);
-     console.log(Password);
-     this.usersRepository.create({...user, Password})
+     const hashingPassword = this.usersRepository.create({...user, Password})
+     console.log("hash", hashingPassword);
     const userDbData = await this.usersRepository.findOne({
       where: {
         Email: user.email,
         Password: user.password,
       },
     });
+    console.log(userDbData);
 
-    return this.convertUserOutputModel(userDbData);
+    return this.convertUserOutputModel(hashingPassword);
   }
 }
