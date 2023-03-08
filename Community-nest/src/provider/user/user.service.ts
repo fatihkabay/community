@@ -70,7 +70,7 @@ export class UserService {
         Password: user.password,
       },
     });
-
+     console.log(userDbData);
     return this.convertUserOutputModel(userDbData);
   }
 }

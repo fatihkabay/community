@@ -4,7 +4,7 @@ import {
 import { Car } from "../../entity/car.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateCarRequestDto, CarResponseDto } from "src/models/Car";
+import { CreateCarRequestDto, CarResponseDto, updateCarDto } from "src/models/Car";
 import { NotFoundException } from "@nestjs/common";
 @Injectable()
 export class CarService {
@@ -52,12 +52,13 @@ export class CarService {
     return res;
   }
 
-    async updatePost(car: CreateCarRequestDto){
-       
+    async updatePost(car: CreateCarRequestDto, newCar: updateCarDto): Promise<any>{
+       const res = await this.carRepository.update(car, newCar);
+       return res;
     }
 
-  async remove(id: number): Promise<void> {
-     const res = await this.remove(id);
+  async remove(car: CarResponseDto): Promise<void> {
+     const res = await this.remove(car);
      return res;
 
   }
