@@ -74,45 +74,6 @@ const Home = () => {
     setLoading(false);
   }
 }
-const onUpdateFinish = async (carsInfo: GetCarInputModel) => {
-  setLoading(true);
-  const updateCar: GetCarInputModel = {
-    Brand: carsInfo.Brand,
-    Model: carsInfo.Model,
-    Year: carsInfo.Year,
-    Kilometer: carsInfo.Kilometer,
-  };
-  try {
-    const res = await CarService.update(updateCar);
-    setCar(res);
-    setLoading(false);
-    message.success("Successfully update car");
-  }
-  catch(error) {
-    message.error("Failed to update vehicle information")
-    setLoading(false);
-  }
-}
-
-const onDeleteFinish = async (carsInfo: GetCarInputModel) => {
-  setLoading(true);
-  const deleteCar: GetCarInputModel = {
-    Brand: carsInfo.Brand,
-    Model: carsInfo.Model,
-    Year: carsInfo.Year,
-    Kilometer: carsInfo.Kilometer,
-  };
-  try {
-    const res = await CarService.deleteCar(deleteCar);
-    console.log("delete car:",res);
-    setLoading(false);
-    message.success("Successfully delete car");
-  }
-  catch(error) {
-    message.error("Failed to delete vehicle information")
-    setLoading(false);
-  }
-}
    const onFinishFailed = (error: ValidateErrorEntity<any>) => {
       console.error(error, message);
     }
