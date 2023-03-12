@@ -36,7 +36,10 @@ export class UserService {
     const userDbData = await this.usersRepository.findOneBy({ Id });
     return this.convertUserOutputModel(userDbData);
   }
-
+  async updatePost(userId: number, newUser: User): Promise<any>{
+    const res = await this.usersRepository.update(userId, newUser);
+    return res;
+ }
   async remove(Id: string): Promise<void> {
     await this.usersRepository.delete(Id);
   }

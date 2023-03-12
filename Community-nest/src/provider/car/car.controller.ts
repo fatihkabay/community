@@ -17,14 +17,4 @@ export class CarController {
     const res = await this.carService.create(car);
     return res;
   }
-   @Put('update')
-   async update(car: CreateCarRequestDto, @Body() newCar: CarResponseDto) {
-     const res = await this.carService.updatePost(car, newCar); 
-     return res;
-  }
-  @Delete('delete')
-  async remove(@Param('id') car: CarResponseDto): Promise<void> {
-    const res = await this.carService.remove(car);
-    return res; 
-  }
 }

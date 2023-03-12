@@ -51,15 +51,4 @@ export class CarService {
     }
     return res;
   }
-
-    async updatePost(car: CreateCarRequestDto, newCar: updateCarDto): Promise<any>{
-       const res = await this.carRepository.update(car, newCar);
-       return res;
-    }
-
-  async remove(car: CarResponseDto): Promise<void> {
-     const res = await this.remove(car);
-     return res;
-
-  }
 }
