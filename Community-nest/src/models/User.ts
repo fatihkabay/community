@@ -49,3 +49,23 @@ export class LoginRequestDto {
   password: string; 
 }
 
+export class UpdateRequestDto {
+  @ApiProperty()
+  name: string;
+
+  @ApiProperty()
+  lastname: string;
+  
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  password: string; 
+
+  @ApiProperty()
+  gender: string;
+
+  @ApiProperty()
+  birthday: string;
+}
+

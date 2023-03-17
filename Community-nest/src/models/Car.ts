@@ -36,18 +36,3 @@ export class CarResponseDto {
     @ApiProperty()
     UserId: User;
   }
-
-  export class updateCarDto {
-    @ApiProperty()
-    Brand: string;
-
-    @ApiProperty()
-    Model: string;
-
-    @ApiProperty()
-    Year: number;
-
-    @ApiProperty()
-    Kilometer: number;
-  }
-

@@ -2,7 +2,7 @@ import { ConflictException, Injectable, NotFoundException } from "@nestjs/common
 import { User } from "../../entity/user.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateUserRequestDto, LoginRequestDto, UserResponseDto } from "src/models/User";
+import { CreateUserRequestDto, LoginRequestDto, UpdateRequestDto, UserResponseDto } from "src/models/User";
 import { enCodePassword } from "src/utils/bcrypt";
 @Injectable()
 export class UserService {
@@ -19,8 +19,6 @@ export class UserService {
     if (input === null) { 
       throw new NotFoundException("User not found");
     }
-    
-
     const res: UserResponseDto = {
       id: input.Id,
       name: input.FirstName,
@@ -36,12 +34,20 @@ export class UserService {
     const userDbData = await this.usersRepository.findOneBy({ Id });
     return this.convertUserOutputModel(userDbData);
   }
-  async updatePost(userId: number, newUser: User): Promise<any>{
-    const res = await this.usersRepository.update(userId, newUser);
-    return res;
+  async updatePost(userId: number, updateUserDto: UpdateRequestDto): Promise<UserResponseDto>{
+    const updateUser = { 
+      FirstName: updateUserDto.name,
+      LastName: updateUserDto.lastname,
+      Email: updateUserDto.email,
+      Password: updateUserDto.password,
+      Birthday: updateUserDto.birthday,
+      Gender: updateUserDto.gender,
+    }
+    const userDbData = await this.usersRepository.save(updateUser);
+    return this.convertUserOutputModel(userDbData);
  }
-  async remove(Id: string): Promise<void> {
-    await this.usersRepository.delete(Id);
+  async remove(id: number): Promise<void> {
+    await this.usersRepository.delete(id);
   }
 
   async create(user: CreateUserRequestDto): Promise<UserResponseDto> {
@@ -50,7 +56,6 @@ export class UserService {
     if (exist) {
       throw new ConflictException()
     }
-
     const requsetUser = {
       FirstName: user.name,
       LastName: user.lastname,

@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, Put, Delete } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { User } from "src/entity/user.entity";
-import { CreateUserRequestDto, UserResponseDto } from "../../models/User";
+import { CreateUserRequestDto, UpdateRequestDto, UserResponseDto } from "../../models/User";
 import { LoginRequestDto } from "../../models/User";
 import { UserService } from "./user.service";
 
@@ -28,13 +28,13 @@ export class UserController {
     return res;
   }
   @Put('update')
-   async updatePost(userId: number, @Body() newUser: User) {
-     const res = await this.userService.updatePost(userId, newUser); 
+   async updatePost(userId: number, @Body() updateUserDto: UpdateRequestDto) {
+     const res = await this.userService.updatePost(userId, updateUserDto); 
      return res;
   }
   @Delete('delete')
-  async remove(@Param('id') user: string): Promise<void> {
-    const res = await this.userService.remove(user);
+  async remove(@Param('id') id: number): Promise<void> {
+    const res = await this.userService.remove(id);
     return res;
   }
 }

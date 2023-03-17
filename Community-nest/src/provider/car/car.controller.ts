@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, Post, Delete, Put } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { CreateCarRequestDto, CarResponseDto, updateCarDto } from "src/models/Car";
+import { CreateCarRequestDto, CarResponseDto } from "src/models/Car";
 import { CarService } from "./car.service";
 @Controller("car")
 @ApiTags("car")

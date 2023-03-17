@@ -4,7 +4,7 @@ import {
 import { Car } from "../../entity/car.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateCarRequestDto, CarResponseDto, updateCarDto } from "src/models/Car";
+import { CreateCarRequestDto, CarResponseDto } from "src/models/Car";
 import { NotFoundException } from "@nestjs/common";
 @Injectable()
 export class CarService {
