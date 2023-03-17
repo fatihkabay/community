@@ -34,17 +34,14 @@ export class UserService {
     const userDbData = await this.usersRepository.findOneBy({ Id });
     return this.convertUserOutputModel(userDbData);
   }
-  async updatePost(userId: number, updateUserDto: UpdateRequestDto): Promise<UserResponseDto>{
-    const updateUser = { 
-      FirstName: updateUserDto.name,
-      LastName: updateUserDto.lastname,
-      Email: updateUserDto.email,
-      Password: updateUserDto.password,
-      Birthday: updateUserDto.birthday,
-      Gender: updateUserDto.gender,
-    }
-    const userDbData = await this.usersRepository.save(updateUser);
-    return this.convertUserOutputModel(userDbData);
+  async updatePost(id: number, updateUserDto: UpdateRequestDto): Promise<UserResponseDto>{
+    const update = await this.findOne(id);
+    update.name = updateUserDto.name,
+    update.lastname = updateUserDto.lastname,
+    update.birthday = updateUserDto.birthday,
+    update.email = updateUserDto.email,
+    update.gender = updateUserDto.gender
+    return update;
  }
   async remove(id: number): Promise<void> {
     await this.usersRepository.delete(id);

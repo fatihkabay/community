@@ -4,7 +4,6 @@ import { User } from "src/entity/user.entity";
 import { CreateUserRequestDto, UpdateRequestDto, UserResponseDto } from "../../models/User";
 import { LoginRequestDto } from "../../models/User";
 import { UserService } from "./user.service";
-
 @Controller("user")
 @ApiTags("user")
 export class UserController {
@@ -28,7 +27,7 @@ export class UserController {
     return res;
   }
   @Put('update')
-   async updatePost(userId: number, @Body() updateUserDto: UpdateRequestDto) {
+   async updatePost(@Param('id') userId: number, @Body() updateUserDto: UpdateRequestDto) {
      const res = await this.userService.updatePost(userId, updateUserDto); 
      return res;
   }
