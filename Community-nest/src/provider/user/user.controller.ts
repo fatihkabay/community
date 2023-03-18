@@ -31,9 +31,9 @@ export class UserController {
      const res = await this.userService.updatePost(userId, updateUserDto); 
      return res;
   }
-  @Delete('delete')
-  async remove(@Param('id') id: number): Promise<void> {
-    const res = await this.userService.remove(id);
-    return res;
-  }
+  // @Delete('delete')
+  // async remove(@Param('id') id: User): Promise<void> {
+  //   const res = await this.userService.remove(id);
+  //   return res;
+  // }
 }

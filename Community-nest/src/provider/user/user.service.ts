@@ -4,6 +4,7 @@ import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserRequestDto, LoginRequestDto, UpdateRequestDto, UserResponseDto } from "src/models/User";
 import { enCodePassword } from "src/utils/bcrypt";
+import { hash, hashSync } from "bcrypt";
 @Injectable()
 export class UserService {
   constructor(
@@ -41,15 +42,17 @@ export class UserService {
     update.birthday = updateUserDto.birthday,
     update.email = updateUserDto.email,
     update.gender = updateUserDto.gender
-    return update;
+    return update ;
  }
-  async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
-  }
+  // async remove(id: number): Promise<void> {
+  //   this.usersRepository.delete(id)
+  // }
 
   async create(user: CreateUserRequestDto): Promise<UserResponseDto> {
     const exist = await this.usersRepository.exist({ where: {  Email: user.email } })
-
+     const Password = enCodePassword(user.password);
+     const hashingPassword = this.usersRepository.create({...user, Password})
+     console.log("hash", hashingPassword);
     if (exist) {
       throw new ConflictException()
     }
@@ -66,9 +69,7 @@ export class UserService {
   }
 
   async login(user: LoginRequestDto): Promise<UserResponseDto> {
-    const Password = enCodePassword(user.password);
-     const hashingPassword = this.usersRepository.create({...user, Password})
-     console.log("hash", hashingPassword);
+    
     const userDbData = await this.usersRepository.findOne({
       where: {
         Email: user.email,
