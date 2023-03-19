@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateUserRequestDto {
   @ApiProperty()
@@ -6,12 +6,12 @@ export class CreateUserRequestDto {
 
   @ApiProperty()
   lastname: string;
-  
+
   @ApiProperty()
   email: string;
 
   @ApiProperty()
-  password: string; 
+  password: string;
 
   @ApiProperty()
   gender: string;
@@ -19,7 +19,6 @@ export class CreateUserRequestDto {
   @ApiProperty()
   birthday: string;
 }
-
 
 export class UserResponseDto {
   @ApiProperty()
@@ -30,7 +29,7 @@ export class UserResponseDto {
 
   @ApiProperty()
   lastname: string;
-  
+
   @ApiProperty()
   email: string;
 
@@ -46,7 +45,7 @@ export class LoginRequestDto {
   email: string;
 
   @ApiProperty()
-  password: string; 
+  password: string;
 }
 
 export class UpdateRequestDto {
@@ -55,12 +54,12 @@ export class UpdateRequestDto {
 
   @ApiProperty()
   lastname: string;
-  
+
   @ApiProperty()
   email: string;
 
   @ApiProperty()
-  password: string; 
+  password: string;
 
   @ApiProperty()
   gender: string;
@@ -69,3 +68,7 @@ export class UpdateRequestDto {
   birthday: string;
 }
 
+export class DeleteRequestDto {
+  @ApiProperty()
+  id: number;
+}

@@ -9,7 +9,7 @@ export class CarController {
 
   @Get(":id")
   async getCar(@Param("id") id: number) {
-    const res = await this.carService.findOne(id)
+    const res = await this.carService.findOne(id);
     return res;
   }
   @Post("create")

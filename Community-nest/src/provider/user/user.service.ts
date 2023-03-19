@@ -1,10 +1,19 @@
-import { ConflictException, Injectable, NotFoundException } from "@nestjs/common";
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { User } from "../../entity/user.entity";
-import { Repository } from "typeorm";
+import { DeleteQueryBuilder, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateUserRequestDto, LoginRequestDto, UpdateRequestDto, UserResponseDto } from "src/models/User";
+import {
+  CreateUserRequestDto,
+  DeleteRequestDto,
+  LoginRequestDto,
+  UpdateRequestDto,
+  UserResponseDto,
+} from "src/models/User";
 import { enCodePassword } from "src/utils/bcrypt";
-import { hash, hashSync } from "bcrypt";
 @Injectable()
 export class UserService {
   constructor(
@@ -17,7 +26,7 @@ export class UserService {
   }
 
   private convertUserOutputModel(input: User): UserResponseDto {
-    if (input === null) { 
+    if (input === null) {
       throw new NotFoundException("User not found");
     }
     const res: UserResponseDto = {
@@ -27,7 +36,7 @@ export class UserService {
       email: input.Email,
       gender: input.Gender,
       birthday: input.Birthday,
-    }
+    };
     return res;
   }
 
@@ -35,26 +44,36 @@ export class UserService {
     const userDbData = await this.usersRepository.findOneBy({ Id });
     return this.convertUserOutputModel(userDbData);
   }
-  async updatePost(id: number, updateUserDto: UpdateRequestDto): Promise<UserResponseDto>{
+  async updateUser(
+    id: number,
+    updateUserDto: UpdateRequestDto,
+  ): Promise<UserResponseDto> {
     const update = await this.findOne(id);
-    update.name = updateUserDto.name,
-    update.lastname = updateUserDto.lastname,
-    update.birthday = updateUserDto.birthday,
-    update.email = updateUserDto.email,
-    update.gender = updateUserDto.gender
-    return update ;
- }
-  // async remove(id: number): Promise<void> {
-  //   this.usersRepository.delete(id)
-  // }
+    (update.name = updateUserDto.name),
+      (update.lastname = updateUserDto.lastname),
+      (update.birthday = updateUserDto.birthday),
+      (update.email = updateUserDto.email),
+      (update.gender = updateUserDto.gender);
+    return update;
+  }
+  async removeUser(id: number): Promise<void> {
+    const res = await this.usersRepository.delete({ Id: id });
+    if (res.affected != null && res.affected > 0) {
+      console.log("Successfully id is deleted.");
+    } else {
+      throw new NotFoundException("This is id not found");
+    }
+  }
 
   async create(user: CreateUserRequestDto): Promise<UserResponseDto> {
-    const exist = await this.usersRepository.exist({ where: {  Email: user.email } })
-     const Password = enCodePassword(user.password);
-     const hashingPassword = this.usersRepository.create({...user, Password})
-     console.log("hash", hashingPassword);
+    const exist = await this.usersRepository.exist({
+      where: { Email: user.email },
+    });
+    const Password = enCodePassword(user.password);
+    const hashingPassword = this.usersRepository.create({ ...user, Password });
+    console.log("hash", hashingPassword);
     if (exist) {
-      throw new ConflictException()
+      throw new ConflictException();
     }
     const requsetUser = {
       FirstName: user.name,
@@ -69,14 +88,12 @@ export class UserService {
   }
 
   async login(user: LoginRequestDto): Promise<UserResponseDto> {
-    
     const userDbData = await this.usersRepository.findOne({
       where: {
         Email: user.email,
         Password: user.password,
       },
     });
-     console.log(userDbData);
     return this.convertUserOutputModel(userDbData);
   }
 }

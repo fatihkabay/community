@@ -1,6 +1,4 @@
-import {
-  Injectable,
-} from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Car } from "../../entity/car.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
@@ -18,10 +16,9 @@ export class CarService {
   }
 
   private convertCarOutputModel(input: Car): CarResponseDto {
-    if (input === null) { 
+    if (input === null) {
       throw new NotFoundException("Car not found");
     }
-    
 
     const res: CarResponseDto = {
       Id: input.Id,
@@ -30,7 +27,7 @@ export class CarService {
       Model: input.Model,
       Kilometer: input.Kilometer,
       Year: input.Year,
-    }
+    };
     return res;
   }
 
@@ -38,9 +35,9 @@ export class CarService {
     const carDbData = await this.carRepository.findOneBy({ Id });
     return this.convertCarOutputModel(carDbData);
   }
-  
+
   async create(car: CreateCarRequestDto): Promise<CarResponseDto> {
-    const carAfterSave = await this.carRepository.save(car)
+    const carAfterSave = await this.carRepository.save(car);
     const res: CarResponseDto = {
       Id: carAfterSave.Id,
       UserId: carAfterSave.UserId,
@@ -48,7 +45,7 @@ export class CarService {
       Model: carAfterSave.Model,
       Year: carAfterSave.Year,
       Kilometer: carAfterSave.Kilometer,
-    }
+    };
     return res;
   }
 }
