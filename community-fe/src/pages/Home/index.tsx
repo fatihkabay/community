@@ -113,12 +113,6 @@ const Home = () => {
           <Button htmlType="submit">
             Get
           </Button>
-          <Button htmlType="submit">
-            Delete
-          </Button>
-          <Button htmlType="submit">
-            Update
-          </Button>
         </Form.Item>
       </Form>
     )

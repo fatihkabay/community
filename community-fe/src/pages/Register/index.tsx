@@ -57,7 +57,7 @@ const Register = () => {
      if (user == null) {
       navigate("/register")
     }
-  }, [1]);
+  }, );
   const onFinish = async (values: RegisterUserModel) => {
     setLoading(true);
     const newUser: RegisterUserInputModel = {

@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useState, useEffect } from 'react';
 import {Breadcrumb, Layout, Menu, theme, Button } from 'antd';
 import "./DefaultLayout.css";
 import { clearStorage } from '../../utils/helpers';
@@ -16,8 +16,16 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
     clearStorage();
     navigate("/login");
   }
-
-  const [collapsed, setCollapsed] = useState(false);
+  const [loading, setLoading] = useState(false);
+    useEffect(() => {
+      const car = getUser();
+      if (car != null) {
+     setTimeout(() => {
+       setLoading(false);
+      }, 1500)
+   }
+    })
+   if (user == null) return <></>;
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -28,12 +36,12 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
           <img className='logo' src="./logo.png" alt="" />
           <div className="header-buttons">
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}  />
-        <Button className='header-button header-toggle-button'>Nav</Button>
+        <Button className='header-button header-toggle-button'>Update</Button>
         <Button className='header-button header-logout-button' onClick={onLogout}>Logout</Button>
         </div>
       </Header>
       <Layout>
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <Sider>
           <Menu
             mode="inline"
             theme='dark'
@@ -67,7 +75,6 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
        
       </Layout>
     </Layout>
-
   );
 };
 export default DefaultLayout;

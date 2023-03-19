@@ -20,3 +20,11 @@ export interface LoginUserInputModel {
     email: string;
     password: string;
 }
+
+export interface UpdateOutputModel {
+    name: string;
+    lastname: string;
+    email: string;
+    gender: string;
+    birthday: number;
+}
