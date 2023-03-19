@@ -4,11 +4,10 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { User } from "../../entity/user.entity";
-import { DeleteQueryBuilder, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import {
   CreateUserRequestDto,
-  DeleteRequestDto,
   LoginRequestDto,
   UpdateRequestDto,
   UserResponseDto,
