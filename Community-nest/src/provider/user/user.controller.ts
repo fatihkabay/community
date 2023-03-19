@@ -10,7 +10,6 @@ import {
 import { ApiParam, ApiTags } from "@nestjs/swagger";
 import {
   CreateUserRequestDto,
-  DeleteRequestDto,
   UpdateRequestDto,
   UserResponseDto,
 } from "../../models/User";
