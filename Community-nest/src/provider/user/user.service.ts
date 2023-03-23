@@ -8,6 +8,7 @@ import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import {
   CreateUserRequestDto,
+  DeleteRequestDto,
   LoginRequestDto,
   UpdateRequestDto,
   UserResponseDto,
@@ -55,13 +56,17 @@ export class UserService {
       (update.gender = updateUserDto.gender);
     return update;
   }
-  async removeUser(id: number): Promise<void> {
+  async removeUser(id: number): Promise<DeleteRequestDto> {
     const res = await this.usersRepository.delete({ Id: id });
     if (res.affected != null && res.affected > 0) {
-      console.log("Successfully id is deleted.");
+      console.log("Successfully id is deleted.", { Id: id });
     } else {
       throw new NotFoundException("This is id not found");
     }
+    const deletes: DeleteRequestDto = {
+      UserId: id,
+    };
+    return deletes;
   }
 
   async create(user: CreateUserRequestDto): Promise<UserResponseDto> {

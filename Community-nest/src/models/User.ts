@@ -70,5 +70,5 @@ export class UpdateRequestDto {
 
 export class DeleteRequestDto {
   @ApiProperty()
-  id: number;
+  UserId: number;
 }
