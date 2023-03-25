@@ -37,6 +37,7 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
           <div className="header-buttons">
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}  />
         <Button className='header-button header-toggle-button'>Update</Button>
+        <Button className='header-button header-toggle-button'>Delete</Button>
         <Button className='header-button header-logout-button' onClick={onLogout}>Logout</Button>
         </div>
       </Header>
