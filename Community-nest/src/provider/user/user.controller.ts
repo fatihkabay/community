@@ -10,6 +10,7 @@ import {
 import { ApiParam, ApiTags } from "@nestjs/swagger";
 import {
   CreateUserRequestDto,
+  DeleteRequestDto,
   UpdateRequestDto,
   UserResponseDto,
 } from "../../models/User";
@@ -47,7 +48,7 @@ export class UserController {
   }
   @Delete("delete/:id")
   @ApiParam({ name: "id", type: Number })
-  async removeUser(@Param("id") id: number): Promise<void> {
+  async removeUser(@Param("id") id: number): Promise<DeleteRequestDto> {
     const res = await this.userService.removeUser(id);
     return res;
   }
