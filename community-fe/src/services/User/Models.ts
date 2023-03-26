@@ -28,3 +28,7 @@ export interface UpdateOutputModel {
     gender: string;
     birthday: number;
 }
+
+export interface DeleteOutputModel {
+    id: number;
+}

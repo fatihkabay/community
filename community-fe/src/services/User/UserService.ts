@@ -15,9 +15,9 @@ class UserService {
         return updateC.data;
     }
 
-    // async remove(deleteUser: any) {
-    //     const deleteC = await axios.delete('http://localhost:3030/user/delete', deleteUser)
-    //     return deleteC.data;
-    // }
+     async remove(deleteUser: any) {
+         const deleteC = await axios.delete('http://localhost:3030/user/delete', deleteUser)
+         return deleteC.data;
+    }
 }
 export default new UserService();
