@@ -11,8 +11,10 @@ export class CarService {
     private carRepository: Repository<Car>,
   ) {}
 
-  private findAll(): Promise<Car[]> {
-    return this.carRepository.find();
+  private findAll() {
+    return this.carRepository.find({
+      relations: ["user", "user.id"],
+    });
   }
 
   private convertCarOutputModel(input: Car): CarResponseDto {
