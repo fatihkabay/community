@@ -4,6 +4,7 @@ import "./DefaultLayout.css";
 import { clearStorage } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../utils/helpers';
+import Loading from "../../components/Loading";
 
 const {Header, Content, Footer, Sider } = Layout;
 
@@ -16,12 +17,10 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
     clearStorage();
     navigate("/login");
   }
-  const [loading, setLoading] = useState(false);
     useEffect(() => {
       const car = getUser();
       if (car != null) {
      setTimeout(() => {
-       setLoading(false);
       }, 1500)
    }
     })
