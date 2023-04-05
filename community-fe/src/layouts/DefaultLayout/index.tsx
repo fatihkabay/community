@@ -1,10 +1,9 @@
-import { PropsWithChildren, useState, useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import {Breadcrumb, Layout, Menu, theme, Button } from 'antd';
 import "./DefaultLayout.css";
 import { clearStorage } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../utils/helpers';
-import Loading from "../../components/Loading";
 
 const {Header, Content, Footer, Sider } = Layout;
 
