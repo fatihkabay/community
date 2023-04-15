@@ -4,7 +4,6 @@ import "./DefaultLayout.css";
 import { clearStorage } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../utils/helpers';
-
 const {Header, Content, Footer, Sider } = Layout;
 
 interface Props {}
@@ -17,8 +16,8 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
     navigate("/login");
   }
     useEffect(() => {
-      const car = getUser();
-      if (car != null) {
+      const user = getUser();
+      if (user != null) {
      setTimeout(() => {
       }, 1500)
    }

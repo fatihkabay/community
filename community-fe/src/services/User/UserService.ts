@@ -15,7 +15,7 @@ class UserService {
         return updateC.data;
     }
 
-     async remove(deleteUser: any) {
+     async delete(deleteUser: any, id: number) {
          const deleteC = await axios.delete('http://localhost:3030/user/delete', deleteUser)
          return deleteC.data;
     }
