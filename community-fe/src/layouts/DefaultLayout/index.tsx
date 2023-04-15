@@ -4,6 +4,7 @@ import "./DefaultLayout.css";
 import { clearStorage } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../utils/helpers';
+import { message } from 'antd';
 const {Header, Content, Footer, Sider } = Layout;
 
 interface Props {}
@@ -22,6 +23,26 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
       }, 1500)
    }
     })
+    useEffect(() => {
+      // DELETE request using fetch with error handling
+      fetch('https://jsonplaceholder.typicode.com/invalid-url', { method: 'DELETE' })
+          .then(async response => {
+              const data = await response.json();
+  
+              // check for error response
+              if (!response.ok) {
+                  // get error message from body or default to response status
+                  const error = (data && data.message) || response.status;
+                  return Promise.reject(error);
+              }
+  
+              message.success('Delete successful');
+          })
+          .catch(error => {
+              error(error);
+              console.error('There was an error!', error);
+          });
+  }, []);
    if (user == null) return <></>;
   const {
     token: { colorBgContainer },
