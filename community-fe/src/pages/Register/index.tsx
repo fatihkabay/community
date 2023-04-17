@@ -135,10 +135,14 @@ const Register = () => {
           </Radio.Group>
         </Form.Item>
         <Form.Item>
+          <div className="register-button">
           <Button htmlType="submit">
             Register
           </Button>
-          <a href="/login">or login with a new account</a>
+         <Button onClick={() => {
+          navigate("/login")
+         }}>I Have Already Account</Button>
+         </div>
         </Form.Item>
       </div>
     </Form>

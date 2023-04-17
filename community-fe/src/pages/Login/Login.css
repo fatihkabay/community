@@ -2,3 +2,8 @@
     max-width: 500px;
     margin: 100px auto 0;
 }
+
+.login-button {
+    display: flex;
+    gap: 10px;
+}

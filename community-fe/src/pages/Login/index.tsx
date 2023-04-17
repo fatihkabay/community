@@ -94,10 +94,15 @@ const Login = () => {
             }
           />
         </Form.Item>
+        <div className="login-button">
           <Button htmlType="submit">
             Login
           </Button>
-          <a href="/register"> or Create a new account</a>
+          <Button>Forgot Password</Button>
+          <Button onClick={() => {
+          navigate("/register")
+        }}>Create Account</Button>
+        </div>
       </div>
     </Form>
   );
