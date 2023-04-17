@@ -56,7 +56,7 @@ export class UserService {
       (update.gender = updateUserDto.gender);
     return update;
   }
-  async removeUser(id: number): Promise<DeleteRequestDto> {
+  async deleteUser(id: number): Promise<DeleteRequestDto> {
     const res = await this.usersRepository.delete({ Id: id });
     if (res.affected != null && res.affected > 0) {
       console.log("Successfully id is deleted.", { Id: id });

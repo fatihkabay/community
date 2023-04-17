@@ -48,8 +48,8 @@ export class UserController {
   }
   @Delete("delete/:id")
   @ApiParam({ name: "id", type: Number })
-  async removeUser(@Param("id") id: number): Promise<DeleteRequestDto> {
-    const res = await this.userService.removeUser(id);
+  async deleteUser(@Param("id") id: number): Promise<DeleteRequestDto> {
+    const res = await this.userService.deleteUser(id);
     return res;
   }
 }
