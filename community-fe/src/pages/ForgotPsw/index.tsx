@@ -44,7 +44,11 @@ return(
         />
       </Form.Item>
       <div className="Fpsw-buttons">
-      <Button htmlType="submit">Send Mail</Button>
+      <Button onClick={() => {
+      <a href="mailto:`{email}`?subject={subject}&body={body}">Click to Send an Email</a>
+          message.success("Send mail")
+    }} 
+      htmlType="submit">Send Mail</Button>
       <Button onClick={() => {
         navigate("/login")
       }}>Login Page</Button>
