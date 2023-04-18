@@ -6,6 +6,7 @@ import { ForgotPswInputModel } from "../../services/User/Models";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Loading from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
+import Email from "../../email-design";
 
 const rules: { [key: string]: Rule[] } = {
 
@@ -44,10 +45,9 @@ return(
         />
       </Form.Item>
       <div className="Fpsw-buttons">
-      <Button onClick={() => {
-      <a href="mailto:`{email}`?subject={subject}&body={body}">Click to Send an Email</a>
-          message.success("Send mail")
-    }} 
+      <Button onClick={Email} onClickCapture={() => {
+        message.success("Successfully Send Mail")
+      }}
       htmlType="submit">Send Mail</Button>
       <Button onClick={() => {
         navigate("/login")
