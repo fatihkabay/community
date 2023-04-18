@@ -32,3 +32,7 @@ export interface UpdateOutputModel {
 export interface DeleteOutputModel {
     id: number;
 }
+
+export interface ForgotPswInputModel {
+    email: string;
+}

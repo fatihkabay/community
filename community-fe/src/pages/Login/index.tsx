@@ -77,6 +77,7 @@ const Login = () => {
       onFinishFailed={onFinishFailed}
     >
       {loading && <Loading />}
+      <h3>Login</h3>
       <div className="login-container">
         <Form.Item name="email" rules={rules.email} className="email">
           <Input
@@ -98,9 +99,11 @@ const Login = () => {
           <Button htmlType="submit">
             Login
           </Button>
-          <Button>Forgot Password</Button>
           <Button onClick={() => {
-          navigate("/register")
+            navigate("/forgot-password")
+          }}>Forgot Password</Button>
+          <Button onClick={() => {
+            navigate("/register")
         }}>Create Account</Button>
         </div>
       </div>

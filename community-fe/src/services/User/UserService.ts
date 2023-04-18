@@ -1,23 +1,28 @@
 import axios from "axios";
-import { LoginUserInputModel, RegisterUserInputModel, UserOutputModel } from './Models';
+import { ForgotPswInputModel, LoginUserInputModel, RegisterUserInputModel, UserOutputModel } from './Models';
 
 class UserService {
     async login(loginUser: LoginUserInputModel): Promise<UserOutputModel> {
-       const save = await axios.post('http://localhost:3030/user/login', loginUser)
-       return save.data;
+       const res = await axios.post('http://localhost:3030/user/login', loginUser)
+       return res.data;
     }
     async register(registerUser: RegisterUserInputModel): Promise<UserOutputModel> {
-        const create = await axios.post('http://localhost:3030/user/register', registerUser);
-        return create.data;
+        const res = await axios.post('http://localhost:3030/user/register', registerUser);
+        return res.data;
     }
     async update(updateUser: UserOutputModel){
-        const updateC = await axios.put('http://localhost:3030/user/update', updateUser);
-        return updateC.data;
+        const res = await axios.put('http://localhost:3030/user/update', updateUser);
+        return res.data;
     }
 
      async delete(deleteUser: any) {
-         const deleteC = await axios.delete('http://localhost:3030/user/delete', deleteUser)
-         return deleteC.data;
+         const res = await axios.delete('http://localhost:3030/user/delete', deleteUser)
+         return res.data;
+    }
+
+    async newPsw(resetPassword: ForgotPswInputModel) {
+        const res = await axios.post('', resetPassword)
+        return res.data;
     }
 }
 export default new UserService();
