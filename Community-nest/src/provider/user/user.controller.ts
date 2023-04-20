@@ -11,6 +11,7 @@ import { ApiParam, ApiTags } from "@nestjs/swagger";
 import {
   CreateUserRequestDto,
   DeleteRequestDto,
+  ForgotPasswordRequestDto,
   UpdateRequestDto,
   UserResponseDto,
 } from "../../models/User";
@@ -38,6 +39,12 @@ export class UserController {
     const res = await this.userService.login(LoginUserDto);
     return res;
   }
+
+  @Post("forgotPsw")
+  async forgotPsw(@Body() forgotPswDto: ForgotPasswordRequestDto) {
+    const res = await this.userService.forgotPassword(forgotPswDto);
+  }
+
   @Put("update/:id")
   async updateUser(
     @Param("id") userId: number,

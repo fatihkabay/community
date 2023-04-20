@@ -9,6 +9,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import {
   CreateUserRequestDto,
   DeleteRequestDto,
+  ForgotPasswordRequestDto,
   LoginRequestDto,
   UpdateRequestDto,
   UserResponseDto,
@@ -67,6 +68,15 @@ export class UserService {
       UserId: id,
     };
     return deletes;
+  }
+
+  async forgotPassword(forgotPswDto: ForgotPasswordRequestDto) {
+    const res = await this.usersRepository.findOne({
+      where: {
+        Email: forgotPswDto.email,
+      },
+    });
+    return res;
   }
 
   async create(user: CreateUserRequestDto): Promise<UserResponseDto> {
