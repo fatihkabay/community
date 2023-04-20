@@ -20,8 +20,8 @@ class UserService {
          return res.data;
     }
 
-    async newPsw(resetPassword: ForgotPswInputModel) {
-        const res = await axios.post('', resetPassword)
+    async forgotPsw(resetPassword: ForgotPswInputModel) {
+        const res = await axios.post('http://localhost:3030/user/forgotPsw', resetPassword)
         return res.data;
     }
 }

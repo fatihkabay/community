@@ -6,7 +6,9 @@ import { ForgotPswInputModel } from "../../services/User/Models";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Loading from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
-import Email from "../../email-design";
+import Email from "../../emailDesign";
+import UserService from "../../services/User/UserService";
+import { setUser } from "../../utils/helpers";
 
 const rules: { [key: string]: Rule[] } = {
 
@@ -22,10 +24,23 @@ const ForgotPswPage = () => {
     const navigate = useNavigate();
     const onGetFinish = async (FpswInfo: ForgotPswInputModel) => {
     setLoading(true);
-    const resetPsw: ForgotPswInputModel = {
+    const sendMail: ForgotPswInputModel = {
       email: FpswInfo.email,
     };
     setLoading(false);
+    try {
+        const res = await UserService.forgotPsw(sendMail);
+        setUser(res);
+        message.success('Successfully send mail');
+        setTimeout(() => {
+          setLoading(false);
+          navigate("/")
+        }, 1500);
+      }
+       catch (error) {
+        message.error('Not Found');
+        setLoading(false);
+      }
     }
    const onFinishFailed = (error: ValidateErrorEntity<any>) => {
       console.error(error, message);
@@ -45,9 +60,7 @@ return(
         />
       </Form.Item>
       <div className="Fpsw-buttons">
-      <Button onClick={Email} onClickCapture={() => {
-        message.success("Successfully Send Mail")
-      }}
+      <Button onClick={Email}
       htmlType="submit">Send Mail</Button>
       <Button onClick={() => {
         navigate("/login")
