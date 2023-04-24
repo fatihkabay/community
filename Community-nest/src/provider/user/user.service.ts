@@ -1,5 +1,7 @@
 import {
   ConflictException,
+  HttpException,
+  HttpStatus,
   Injectable,
   NotFoundException,
 } from "@nestjs/common";
@@ -9,7 +11,6 @@ import { InjectRepository } from "@nestjs/typeorm";
 import {
   CreateUserRequestDto,
   DeleteRequestDto,
-  ForgotPasswordRequestDto,
   LoginRequestDto,
   UpdateRequestDto,
   UserResponseDto,
@@ -70,13 +71,21 @@ export class UserService {
     return deletes;
   }
 
-  async forgotPassword(forgotPswDto: ForgotPasswordRequestDto) {
-    const res = await this.usersRepository.findOne({
-      where: {
-        Email: forgotPswDto.email,
-      },
-    });
+  async createForgottenPasswordToken(email: string) {
+    const res = {
+      email: email,
+    };
     return res;
+  }
+
+  async forgotPassword(email: string): Promise<boolean> {
+    const userDbData = await this.usersRepository.findOne({ email: email });
+    if (!userDbData)
+      throw new HttpException("LOGIN.USER_NOT_FOUND", HttpStatus.NOT_FOUND);
+
+    const tokenModel = await this.createForgottenPasswordToken(email);
+    if (tokenModel) {
+    }
   }
 
   async create(user: CreateUserRequestDto): Promise<UserResponseDto> {

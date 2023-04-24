@@ -72,8 +72,3 @@ export class DeleteRequestDto {
   @ApiProperty()
   UserId: number;
 }
-
-export class ForgotPasswordRequestDto {
-  @ApiProperty()
-  email: string;
-}
