@@ -50,7 +50,7 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
             className="header-button header-toggle-button"
             onClick = {(e) => {
               if (window.confirm("Do you want to remove?")){
-             fetch('http://localhost:3030/api#/user/UserController_deleteUser'+ { method: 'DELETE' }).then((response) => {
+             fetch('http://localhost:3030/user/delete'+ { method: 'DELETE' }).then((response) => {
               if (!response.ok){
                 throw new Error("Something new error.");
               }
