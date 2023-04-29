@@ -11,29 +11,16 @@ interface Props {}
 const DefaultLayout = (props: PropsWithChildren<Props>) => {
   const user = getUser();
   const navigate = useNavigate();
-  const onLogout = () => {
-    clearStorage();
-    navigate("/login");
-  };
   useEffect(() => {
-    const user = getUser();
     if (user != null) {
       setTimeout(() => {}, 1500);
     }
   });
-//  const onRemove = ((id: any) => {
-//   if (window.confirm("Do you want to remove?")){
-//     fetch('http://localhost:3030/user/delete'+ id,
-//     { method: 'DELETE' }).then(() => {
-//      navigate("/login")
-//      window.location.reload();
+  const onLogout = () => {
+    clearStorage();
+    navigate("/login");
+  };
 
-//     }).catch((err) => {
-//       console.error(err.message);
-//     })
-//   }
-//  })
-     
   if (user == null) return <></>;
   const {
     token: { colorBgContainer },
@@ -48,18 +35,6 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
           <Button className="header-button header-toggle-button">Update</Button>
           <Button
             className="header-button header-toggle-button"
-            onClick = {(e) => {
-              if (window.confirm("Do you want to remove?")){
-             fetch('http://localhost:3030/user/delete'+ { method: 'DELETE' }).then((response) => {
-              if (!response.ok){
-                throw new Error("Something new error.");
-              }
-              navigate("/register");
-             })
-             .catch((e) => {
-              console.log(e);
-             })}
-            }}
           >
             Delete
           </Button>
