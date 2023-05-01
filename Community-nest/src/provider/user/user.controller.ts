@@ -27,12 +27,6 @@ export class UserController {
     return res;
   }
 
-  @Get("email/forgot-password/:email")
-  async forgotPsw(@Body() email: string) {
-    const res = await this.userService.forgotPassword(email);
-    return res;
-  }
-
   @Post("register")
   async register(@Body() createUserDto: CreateUserRequestDto) {
     const res = await this.userService.create(createUserDto);

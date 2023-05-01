@@ -1,7 +1,5 @@
 import {
   ConflictException,
-  HttpException,
-  HttpStatus,
   Injectable,
   NotFoundException,
 } from "@nestjs/common";
@@ -76,16 +74,6 @@ export class UserService {
       email: email,
     };
     return res;
-  }
-
-  async forgotPassword(email: string): Promise<boolean> {
-    const userDbData = await this.usersRepository.findOne({ email: email });
-    if (!userDbData)
-      throw new HttpException("LOGIN.USER_NOT_FOUND", HttpStatus.NOT_FOUND);
-
-    const tokenModel = await this.createForgottenPasswordToken(email);
-    if (tokenModel) {
-    }
   }
 
   async create(user: CreateUserRequestDto): Promise<UserResponseDto> {
