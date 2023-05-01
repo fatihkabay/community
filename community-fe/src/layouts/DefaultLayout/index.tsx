@@ -4,6 +4,10 @@ import "./DefaultLayout.css";
 import { clearStorage } from "../../utils/helpers";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../utils/helpers";
+import "./DefaultLayout.css";
+import { MenuProps } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+
 const { Header, Content, Footer, Sider } = Layout;
 
 interface Props {}
@@ -20,30 +24,55 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
     clearStorage();
     navigate("/login");
   };
-
   if (user == null) return <></>;
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  type MenuItem = Required<MenuProps>["items"][number];
+  function getItem(
+    label: React.ReactNode,
+    key?: React.Key | null,
+    icon?: React.ReactNode,
+    children?: MenuItem[],
+    type?: "group"
+  ): MenuItem {
+    return {
+      key,
+      icon,
+      children,
+      label,
+      type,
+    } as MenuItem;
+  }
+  const items: MenuItem[] = [
+    getItem("Navigation One", "sub1", <UserOutlined />, [
+      getItem(<Button
+        className="header-button header-logout-button"
+        onClick={onLogout}
+      >
+        Logout
+      </Button>),
+      getItem(
+        <Button className="header-button">User Info</Button>
+      ),
+    ]),
+  ];
+  const userInfoClickControl: MenuProps["onClick"] = (e) => {
+    console.log("click", e);
+  };
   return (
     <Layout>
       <Header className="header">
         <img className="logo" src="./logo.png" alt="" />
         <div className="header-buttons">
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]} />
-          <Button className="header-button header-toggle-button">Update</Button>
-          <Button
-            className="header-button header-toggle-button"
-          >
-            Delete
-          </Button>
-          <Button
-            className="header-button header-logout-button"
-            onClick={onLogout}
-          >
-            Logout
-          </Button>
+          <Menu
+            onClick={userInfoClickControl}
+            style={{ width: 256 }}
+            mode="horizontal"
+            theme="dark"
+            items={items}
+          ></Menu>
         </div>
       </Header>
       <Layout>
