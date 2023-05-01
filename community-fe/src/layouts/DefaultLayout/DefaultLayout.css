@@ -24,3 +24,29 @@
  :where(.css-dev-only-do-not-override-1n7nwfa).ant-layout .ant-layout-header{
    padding-inline: 0;
  }
+
+ .header-button {
+   width: 120px;
+   height: 31px;
+   margin: auto;
+   color: #FAFAFA;
+   border: 0;
+   background: transparent;
+   
+  }
+
+ .header-logout-button {
+   color: #E53935;
+ }
+
+ .sider-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+ }
+
+ .sider-button {
+  background-color: transparent;
+  color: #FAFAFA;
+  border: 0;
+ }

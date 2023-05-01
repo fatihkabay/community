@@ -46,15 +46,15 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
     } as MenuItem;
   }
   const items: MenuItem[] = [
-    getItem("Navigation One", "sub1", <UserOutlined />, [
-      getItem(<Button
-        className="header-button header-logout-button"
-        onClick={onLogout}
-      >
-        Logout
-      </Button>),
+    getItem("", "sub1", <UserOutlined />, [
+      getItem(<Button className="header-button">Profile</Button>),
       getItem(
-        <Button className="header-button">User Info</Button>
+        <Button
+          className="header-button header-logout-button"
+          onClick={onLogout}
+        >
+          Logout
+        </Button>
       ),
     ]),
   ];
@@ -65,10 +65,9 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
     <Layout>
       <Header className="header">
         <img className="logo" src="./logo.png" alt="" />
-        <div className="header-buttons">
+        <div>
           <Menu
             onClick={userInfoClickControl}
-            style={{ width: 256 }}
             mode="horizontal"
             theme="dark"
             items={items}
@@ -80,13 +79,13 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
           <Menu
             mode="inline"
             theme="dark"
+            className="sider-buttons"
             defaultSelectedKeys={["1"]}
             defaultOpenKeys={["sub1"]}
             style={{ height: "100%", borderRight: 0 }}
           >
-            <Button className="sider-buttons">Nav</Button>
-            <Button className="sider-buttons">Nav</Button>
-            <Button className="sider-buttons">Nav</Button>
+            <Button className="sider-button">My Car Info</Button>
+            <Button className="sider-button">Lorem Ipsum</Button>
           </Menu>
         </Sider>
         <Layout style={{ padding: "0 24px 24px" }}>
@@ -113,7 +112,7 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
             >
               {props.children}
             </div>
-          </Content>{" "}
+          </Content>
           <Footer style={{ textAlign: "center" }}>
             Community ©2023 Created by Fatih Kabay
           </Footer>

@@ -1,14 +1,11 @@
-.home-container {
-    display: flex;
-}
-
 .home-page {
+    flex-direction: column;
     max-width: 500px;
     max-height: 450px;
     margin: 100px auto 0;
 }
 
-.home-buttons {
+.car-props-buttons {
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
