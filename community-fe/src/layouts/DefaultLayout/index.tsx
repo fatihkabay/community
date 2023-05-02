@@ -45,9 +45,14 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
       type,
     } as MenuItem;
   }
+  
+  const profileClick = () => {
+    navigate("/user-info");
+  } 
+
   const items: MenuItem[] = [
     getItem("", "sub1", <UserOutlined />, [
-      getItem(<Button className="header-button">Profile</Button>),
+      getItem(<Button className="header-button" onClick={profileClick}>Profile</Button>),
       getItem(
         <Button
           className="header-button header-logout-button"
