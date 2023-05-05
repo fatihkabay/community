@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import './index';
 import DefaultLayout from "./layouts/DefaultLayout";
 import UserInfoPg from "./pages/UserInfoPg";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />  
         <Route path="/forgot-password" element={<ForgotPsw />} />
         <Route path="/user-info" element={<UserInfoPg/>} />
+        <Route path="/search" element={<Search/>} />
         <Route path="/" element={<DefaultLayout><Home /></DefaultLayout>} />
       </Routes>
     </div>
