@@ -45,14 +45,16 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
       type,
     } as MenuItem;
   }
-  
-  const profileClick = () => {
-    navigate("/user-info");
-  } 
 
   const items: MenuItem[] = [
     getItem("", "sub1", <UserOutlined />, [
-      getItem(<Button className="header-button" onClick={profileClick}>Profile</Button>),
+      getItem(
+        <Button className="header-button" onClick={() => {
+          navigate("/user-info");
+        }}>
+          Profile
+        </Button>
+      ),
       getItem(
         <Button
           className="header-button header-logout-button"
@@ -89,7 +91,14 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
             defaultOpenKeys={["sub1"]}
             style={{ height: "100%", borderRight: 0 }}
           >
-            <Button className="sider-button">My Car Info</Button>
+            <Button
+              onClick={() => {
+                navigate("/car-info");
+              }}
+              className="sider-button"
+            >
+              My Car Info
+            </Button>
             <Button className="sider-button">Lorem Ipsum</Button>
           </Menu>
         </Sider>

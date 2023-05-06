@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getCar, getUser, setCar } from "../../utils/helpers";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
-import { Input, Form, Button, message, Rate } from "antd";
+import { Input, Form, Button, message } from "antd";
 import { Rule } from "antd/es/form";
 import CarService from "../../services/Car/CarService";
 import { GetCarInputModel } from "../../services/Car/Models";
@@ -111,7 +111,6 @@ const Home = () => {
             style={{ color: '#E53935' }}
           />
         </Button>
-        <Rate allowHalf defaultValue={2.5}/>
       </div>
     </Form>
   );
