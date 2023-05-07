@@ -9,6 +9,8 @@ import { GetCarInputModel } from "../../services/Car/Models";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Loading from "../../components/Loading";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { TodoForm } from './TodoForm';
+import { TodoList } from './TodoList';
 
 const rules: { [key: string]: Rule[] } = {
   brand: [
@@ -33,6 +35,7 @@ const rules: { [key: string]: Rule[] } = {
 };
 
 const Home = () => {
+  const [todos, setTodos] = useState<Array<Todo>>([]);
   const user = getUser();
   const navigate = useNavigate();
   useEffect(() => {
@@ -77,7 +80,23 @@ const Home = () => {
   };
 
   if (user == null) return <></>;
+  
 
+  const toggleComplete: ToggleComplete = selectedTodo => {
+    const updatedTodos = todos.map(todo => {
+      if (todo === selectedTodo) {
+        return { ...todo, complete: !todo.complete };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
+
+  const addTodo: AddTodo = newTodo => {
+    if (newTodo !== "") {
+      setTodos([...todos, { text: newTodo, complete: false }]);
+    }
+  };
   return (
     <Form
       className="home-page"
@@ -85,6 +104,8 @@ const Home = () => {
       onFinishFailed={onFinishFailed}
     >
       {loading && <Loading />}
+      <TodoForm addTodo={addTodo}/>
+      <TodoList todos={todos} toggleComplete={toggleComplete}/>
       <Form.Item name="Brand" rules={rules.brand} className="Brand">
         <Input placeholder="Brand" type="text" />
       </Form.Item>

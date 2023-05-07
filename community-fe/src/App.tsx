@@ -3,9 +3,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPsw from "./pages/ForgotPsw";
 import { Routes, Route } from "react-router-dom";
-import CarInfo from "./pages/MyCarInfoPg";
 import DefaultLayout from "./layouts/DefaultLayout";
 import UserInfo from "./pages/UserInfoPg";
+import "./App.css"
 
 function App() {
   return (
@@ -14,8 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />  
         <Route path="/forgot-password" element={<ForgotPsw />} />
-        <Route path="/user-info" element={<UserInfo/>} />
-        <Route path="/car-info" element={<CarInfo />} />
+        <Route path="/user-info" element={<UserInfo />} />
         <Route path="/" element={<DefaultLayout><Home /></DefaultLayout>} />
       </Routes>
     </div>

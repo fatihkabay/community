@@ -4,7 +4,6 @@ import "./DefaultLayout.css";
 import { clearStorage } from "../../utils/helpers";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../utils/helpers";
-import "./DefaultLayout.css";
 import { MenuProps } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
@@ -49,9 +48,12 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
   const items: MenuItem[] = [
     getItem("", "sub1", <UserOutlined />, [
       getItem(
-        <Button className="header-button" onClick={() => {
-          navigate("/user-info");
-        }}>
+        <Button
+          className="header-button"
+          onClick={() => {
+            navigate("/user-info");
+          }}
+        >
           Profile
         </Button>
       ),
@@ -91,14 +93,7 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
             defaultOpenKeys={["sub1"]}
             style={{ height: "100%", borderRight: 0 }}
           >
-            <Button
-              onClick={() => {
-                navigate("/car-info");
-              }}
-              className="sider-button"
-            >
-              My Car Info
-            </Button>
+            <Button onClick={() => {navigate("/todos")}} className="sider-button">My Car Info</Button>
             <Button className="sider-button">Lorem Ipsum</Button>
           </Menu>
         </Sider>
