@@ -84,7 +84,7 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
         </div>
       </Header>
       <Layout>
-        <Sider>
+        <Sider >
           <Menu
             mode="inline"
             theme="dark"
@@ -93,7 +93,7 @@ const DefaultLayout = (props: PropsWithChildren<Props>) => {
             defaultOpenKeys={["sub1"]}
             style={{ height: "100%", borderRight: 0 }}
           >
-            <Button onClick={() => {navigate("/todos")}} className="sider-button">My Car Info</Button>
+            <Button onClick={() => navigate("/todos")} className="sider-button">Todo Example</Button>
             <Button className="sider-button">Lorem Ipsum</Button>
           </Menu>
         </Sider>

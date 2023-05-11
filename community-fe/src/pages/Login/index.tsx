@@ -78,7 +78,7 @@ const Login = () => {
     >
       {loading && <Loading />}
       <h3>Login</h3>
-      <div className="login-container">
+      <div>
         <Form.Item name="email" rules={rules.email} className="email">
           <Input
             prefix={<MailOutlined />}

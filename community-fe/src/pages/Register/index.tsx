@@ -95,7 +95,7 @@ const Register = () => {
     >
       {loading && <Loading />}
       <h3>Register</h3>
-      <div className="register-container">
+      <div>
         <Form.Item name="firstName" rules={rules.firstName} className="first-name">
           <Input
             prefix={<UserOutlined />}
