@@ -1,4 +1,3 @@
-import "./todo.css";
 import { useState } from 'react';
 import TodoForm from './TodoForm';
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";

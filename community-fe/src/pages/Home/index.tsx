@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, FC, ChangeEvent } from "react";
 import { getCar, getUser, setCar } from "../../utils/helpers";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import CarService from "../../services/Car/CarService";
 import { GetCarInputModel } from "../../services/Car/Models";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Loading from "../../components/Loading";
+import TodoTask from "../../components/TodoTask";
+import { ITask } from "./interfaces";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 const rules: { [key: string]: Rule[] } = {
   brand: [
@@ -31,7 +33,36 @@ const rules: { [key: string]: Rule[] } = {
   ],
 };
 
-const Home = () => {
+const Home: FC = () => {
+  const [task, setTask] = useState<string>("");
+  const [deadLine, setDeadLine] = useState<number>(0);
+  const [todo, setTodo] = useState<ITask[]>([]);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.name === "task") {
+      setTask(event.target.value);
+    } else {
+      setDeadLine(Number(event.target.value));
+    }
+  };
+
+  const addTask = (): void => {
+    const newTask = {
+      taskName: task,
+      deadline: deadLine,
+    };
+    setTodo([...todo, newTask]);
+    setTask("");
+    setDeadLine(0);
+  };
+
+  const completeTask = (taskNameToDelete: string): void => {
+    setTodo(
+      todo.filter((task) => {
+        return task.taskName !== taskNameToDelete;
+      })
+    );
+  };
   const user = getUser();
   const navigate = useNavigate();
   useEffect(() => {
@@ -85,31 +116,55 @@ const Home = () => {
     >
       {loading && <Loading />}
       <Form.Item name="Brand" rules={rules.brand} className="Brand">
-        <Input placeholder="Brand" type="text" />
+        <Input
+          onChange={handleChange}
+          placeholder="Brand"
+          type="text"
+          name="task"
+          value={task}
+        />
       </Form.Item>
       <Form.Item name="Model" rules={rules.model} className="Model">
-        <Input placeholder="Model" type="text" />
+        <Input
+          onChange={handleChange}
+          placeholder="Model"
+          type="text"
+          name="task"
+          value={task}
+        />
       </Form.Item>
       <Form.Item name="Year" rules={rules.year} className="Year">
-        <Input placeholder="Year" />
+        <Input
+          onChange={handleChange}
+          placeholder="Year"
+          type="text"
+          name="deadline"
+          value={deadLine}
+        />
       </Form.Item>
       <Form.Item name="Kilometer" rules={rules.kilometer} className="Kilometer">
-        <Input placeholder="Kilometer" type="text" />
+        <Input
+          placeholder="Kilometer"
+          type="text"
+          name="deadline"
+          value={deadLine}
+        />
       </Form.Item>
-        <div className="car-props-buttons">
-        <Button htmlType="submit">
-          <PlusOutlined
-          style={{ color: '#2196F3' }} />
+      <div className="car-props-buttons">
+        <Button onClick={addTask} htmlType="submit">
+          <PlusOutlined style={{ color: "#2196F3" }} />
         </Button>
         <Button>
-          <EditOutlined
-          style={{ color: '#FFA000' }} />
+          <EditOutlined style={{ color: "#FFA000" }} />
         </Button>
         <Button>
-          <DeleteOutlined
-            style={{ color: '#E53935' }}
-          />
+          <DeleteOutlined style={{ color: "#E53935" }} />
         </Button>
+      </div>
+      <div className="todoList">
+        {todo.map((task: ITask, key: number) => {
+          return <TodoTask key={key} task={task} completeTask={completeTask} />;
+        })}
       </div>
     </Form>
   );
