@@ -36,6 +36,8 @@ const rules: { [key: string]: Rule[] } = {
 const Home: FC = () => {
   const [task, setTask] = useState<string>("");
   const [deadLine, setDeadLine] = useState<number>(0);
+  const [tasks, setTasks] = useState<string>("");
+  const [deadLines, setDeadLines] = useState<number>(0);
   const [todo, setTodo] = useState<ITask[]>([]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -46,10 +48,20 @@ const Home: FC = () => {
     }
   };
 
+  const handlesChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.name === "task") {
+      setTasks(event.target.value);
+    } else {
+      setDeadLines(Number(event.target.value));
+    }
+  };
+
   const addTask = (): void => {
     const newTask = {
       taskName: task,
-      deadline: deadLine,
+      deadLine: deadLine,
+      dead: deadLines,
+      task: tasks,
     };
     setTodo([...todo, newTask]);
     setTask("");
@@ -117,37 +129,38 @@ const Home: FC = () => {
       {loading && <Loading />}
       <Form.Item name="Brand" rules={rules.brand} className="Brand">
         <Input
-          onChange={handleChange}
           placeholder="Brand"
           type="text"
-          name="task"
-          value={task}
+          name='task'
+           value={tasks}
+           onChange={handlesChange}
         />
       </Form.Item>
       <Form.Item name="Model" rules={rules.model} className="Model">
         <Input
-          onChange={handleChange}
           placeholder="Model"
           type="text"
-          name="task"
+          name='task'
           value={task}
+          onChange={handleChange}
         />
       </Form.Item>
       <Form.Item name="Year" rules={rules.year} className="Year">
         <Input
-          onChange={handleChange}
           placeholder="Year"
           type="text"
-          name="deadline"
-          value={deadLine}
+          name='deadline'
+          value={deadLines}
+          onChange={handlesChange}
         />
       </Form.Item>
       <Form.Item name="Kilometer" rules={rules.kilometer} className="Kilometer">
         <Input
           placeholder="Kilometer"
           type="text"
-          name="deadline"
+          name='deadline'
           value={deadLine}
+          onChange={handleChange}
         />
       </Form.Item>
       <div className="car-props-buttons">

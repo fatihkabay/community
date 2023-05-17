@@ -10,10 +10,10 @@ interface Props{
 const TodoTask= ({task, completeTask}:Props) => {
   return (
   <div className="task">
-    <div className='content'>
-      <span>Brand:{task.taskName}</span>
-      <span>Kilometer:{task.deadline}</span>
-    </div>
+      <span><strong>Brand</strong>:{task.task}</span>
+      <span><strong>Model</strong>:{task.taskName}</span>
+      <span><strong>Year</strong>:{task.dead}</span>
+      <span><strong>Kilometer</strong>:{task.deadLine}</span>
     <button onClick={()=>{
       completeTask(task.taskName);
     }}><DeleteOutlined /></button>

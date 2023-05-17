@@ -1,4 +1,6 @@
 export interface ITask{
     taskName:string;
-    deadline:number;
+    task:string;
+    dead:number;
+    deadLine: number;
   }
