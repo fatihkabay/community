@@ -9,8 +9,6 @@ import { CarModule } from "./provider/car/car.module";
 
 @Module({
   imports: [
-    UserModule,
-    CarModule,
     TypeOrmModule.forRoot({
       type: "postgres",
       host: "localhost",
@@ -22,6 +20,8 @@ import { CarModule } from "./provider/car/car.module";
       synchronize: true,
       autoLoadEntities: true,
     }),
+    UserModule,
+    CarModule,
   ],
   controllers: [AppController],
   providers: [AppService],

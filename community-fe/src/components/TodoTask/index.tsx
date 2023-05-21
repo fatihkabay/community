@@ -1,5 +1,12 @@
+import { useState } from 'react';
 import { ITask } from '../../pages/Home/interfaces';
 import { DeleteOutlined } from '@ant-design/icons';
+import { Form, Button, message } from 'antd';
+import { ValidateErrorEntity } from "rc-field-form/lib/interface";
+import Loading from "../../components/Loading";
+import { DeleteOutputModel } from '../../services/Car/Models';
+import CarService from '../../services/Car/CarService';
+import { clearStorage, setCar } from '../../utils/helpers';
 import "./task.css"
 
 interface Props{
@@ -8,16 +15,44 @@ interface Props{
 }
 
 const TodoTask= ({task, completeTask}:Props) => {
+  const [loading, setLoading] = useState(false);
+
+  const onDelete = async (carsInfo: DeleteOutputModel) => {
+    message.success("ewjgpng");
+    setLoading(true);
+    const deleteCar: DeleteOutputModel = {
+      id: carsInfo.id,
+    };
+    try {
+      await CarService.delete(deleteCar);
+      clearStorage();
+      message.success("Successfully Deleted");
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
+    } catch (error) {
+      message.error("Error deleting car:");
+      setLoading(false);
+    }
+  };
+  const onFinishFailed = (error: ValidateErrorEntity<any>) => {
+    console.error(error, message);
+  };
   return (
+    <Form
+      className="home-page"
+      onFinish={onDelete}
+      onFinishFailed={onFinishFailed}
+    >
+      {loading && <Loading />}
   <div className="task">
       <span><strong>Brand</strong>:{task.task}</span>
       <span><strong>Model</strong>:{task.taskName}</span>
       <span><strong>Year</strong>:{task.dead}</span>
       <span><strong>Kilometer</strong>:{task.deadLine}</span>
-    <button onClick={()=>{
-      completeTask(task.taskName);
-    }}><DeleteOutlined /></button>
+    <Button htmlType='submit' onClick={() => completeTask(task.taskName)}><DeleteOutlined /></Button>
   </div>
+  </Form>
   );
 }
 

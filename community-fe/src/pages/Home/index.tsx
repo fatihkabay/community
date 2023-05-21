@@ -131,16 +131,16 @@ const Home: FC = () => {
         <Input
           placeholder="Brand"
           type="text"
-          name='task'
-           value={tasks}
-           onChange={handlesChange}
+          name="task"
+          value={tasks}
+          onChange={handlesChange}
         />
       </Form.Item>
       <Form.Item name="Model" rules={rules.model} className="Model">
         <Input
           placeholder="Model"
           type="text"
-          name='task'
+          name="task"
           value={task}
           onChange={handleChange}
         />
@@ -149,7 +149,7 @@ const Home: FC = () => {
         <Input
           placeholder="Year"
           type="text"
-          name='deadline'
+          name="deadline"
           value={deadLines}
           onChange={handlesChange}
         />
@@ -158,7 +158,7 @@ const Home: FC = () => {
         <Input
           placeholder="Kilometer"
           type="text"
-          name='deadline'
+          name="deadline"
           value={deadLine}
           onChange={handleChange}
         />
@@ -182,4 +182,5 @@ const Home: FC = () => {
     </Form>
   );
 };
+
 export default Home;

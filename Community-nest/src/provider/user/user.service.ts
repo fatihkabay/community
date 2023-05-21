@@ -8,9 +8,7 @@ import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import {
   CreateUserRequestDto,
-  DeleteRequestDto,
   LoginRequestDto,
-  UpdateRequestDto,
   UserResponseDto,
 } from "src/models/User";
 import { enCodePassword } from "src/utils/bcrypt";
@@ -43,37 +41,6 @@ export class UserService {
   async findOne(Id: number): Promise<UserResponseDto> {
     const userDbData = await this.usersRepository.findOneBy({ Id });
     return this.convertUserOutputModel(userDbData);
-  }
-  async updateUser(
-    id: number,
-    updateUserDto: UpdateRequestDto,
-  ): Promise<UserResponseDto> {
-    const update = await this.findOne(id);
-    (update.name = updateUserDto.name),
-      (update.lastname = updateUserDto.lastname),
-      (update.birthday = updateUserDto.birthday),
-      (update.email = updateUserDto.email),
-      (update.gender = updateUserDto.gender);
-    return update;
-  }
-  async deleteUser(id: number): Promise<DeleteRequestDto> {
-    const res = await this.usersRepository.delete({ Id: id });
-    if (res.affected != null && res.affected > 0) {
-      console.log("Successfully id is deleted.", { Id: id });
-    } else {
-      throw new NotFoundException("This is id not found");
-    }
-    const deletes: DeleteRequestDto = {
-      UserId: id,
-    };
-    return deletes;
-  }
-
-  async createForgottenPasswordToken(email: string) {
-    const res = {
-      email: email,
-    };
-    return res;
   }
 
   async create(user: CreateUserRequestDto): Promise<UserResponseDto> {

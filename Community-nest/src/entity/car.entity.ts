@@ -18,6 +18,6 @@ export class Car {
   @Column()
   Kilometer: number;
 
-  @ManyToOne(() => User, (user) => user.cars)
+  @ManyToOne(() => User, (user) => user.Cars)
   User: User;
 }
