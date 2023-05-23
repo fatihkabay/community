@@ -25,36 +25,36 @@ export class CarService {
     }
 
     const res: CarResponseDto = {
-      Id: input.Id,
-      UserId: input.User.Id,
-      Brand: input.Brand,
-      Model: input.Model,
-      Kilometer: input.Kilometer,
-      Year: input.Year,
+      id: input.id,
+      userId: input.User.id,
+      brand: input.brand,
+      model: input.model,
+      kilometer: input.kilometer,
+      year: input.year,
     };
     return res;
   }
 
-  async findOne(Id: number): Promise<CarResponseDto> {
-    const carDbData = await this.carRepository.findOneBy({ Id });
+  async findOne(id: number): Promise<CarResponseDto> {
+    const carDbData = await this.carRepository.findOneBy({ id });
     return this.convertCarOutputModel(carDbData);
   }
 
   async create(car: CreateCarRequestDto): Promise<CarResponseDto> {
     const user = new User();
-    user.Id = car.UserId;
+    user.id = car.userId;
     const carSaveData = {
       ...car,
       User: user,
     };
     const carAfterSave = await this.carRepository.save(carSaveData);
     const res: CarResponseDto = {
-      Id: carAfterSave.Id,
-      UserId: carAfterSave.User.Id,
-      Brand: carAfterSave.Brand,
-      Model: carAfterSave.Model,
-      Year: carAfterSave.Year,
-      Kilometer: carAfterSave.Kilometer,
+      id: carAfterSave.id,
+      userId: carAfterSave.User.id,
+      brand: carAfterSave.brand,
+      model: carAfterSave.model,
+      year: carAfterSave.year,
+      kilometer: carAfterSave.kilometer,
     };
     return res;
   }
@@ -63,21 +63,21 @@ export class CarService {
     updateCarDto: UpdateRequestDto,
   ): Promise<CarResponseDto> {
     const update = await this.findOne(id);
-    (update.Brand = updateCarDto.brand),
-      (update.Model = updateCarDto.model),
-      (update.Year = updateCarDto.year),
-      (update.Kilometer = updateCarDto.kilometer);
+    (update.brand = updateCarDto.brand),
+      (update.model = updateCarDto.model),
+      (update.year = updateCarDto.year),
+      (update.kilometer = updateCarDto.kilometer);
     return update;
   }
   async deleteCar(id: number): Promise<DeleteRequestDto> {
-    const res = await this.carRepository.delete({ Id: id });
+    const res = await this.carRepository.delete({ id: id });
     if (res.affected != null && res.affected > 0) {
       console.log("Successfully id is deleted.", { Id: id });
     } else {
       throw new NotFoundException("This is id not found");
     }
     const deletes: DeleteRequestDto = {
-      UserId: id,
+      userId: id,
     };
     return deletes;
   }

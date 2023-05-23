@@ -4,25 +4,25 @@ import { Car } from "./car.entity";
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  Id: number;
+  id: number;
 
   @Column()
-  FirstName: string;
+  firstName: string;
 
   @Column()
-  LastName: string;
+  lastName: string;
 
   @Column()
-  Email: string;
+  email: string;
 
   @Column()
-  Gender: string;
+  gender: string;
 
   @Column()
-  Birthday: string;
+  birthday: string;
 
   @Column()
-  Password: string;
+  password: string;
 
   @OneToMany(() => Car, (car) => car.User)
   Cars: Car[];

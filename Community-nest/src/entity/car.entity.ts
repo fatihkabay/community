@@ -4,19 +4,19 @@ import { User } from "./user.entity";
 @Entity()
 export class Car {
   @PrimaryGeneratedColumn()
-  Id: number;
+  id: number;
 
   @Column()
-  Brand: string;
+  brand: string;
 
   @Column()
-  Model: string;
+  model: string;
 
   @Column()
-  Year: number;
+  year: number;
 
   @Column()
-  Kilometer: number;
+  kilometer: number;
 
   @ManyToOne(() => User, (user) => user.Cars)
   User: User;

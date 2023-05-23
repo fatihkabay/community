@@ -28,38 +28,38 @@ export class UserService {
       throw new NotFoundException("User not found");
     }
     const res: UserResponseDto = {
-      id: input.Id,
-      name: input.FirstName,
-      lastname: input.LastName,
-      email: input.Email,
-      gender: input.Gender,
-      birthday: input.Birthday,
+      id: input.id,
+      name: input.firstName,
+      lastname: input.lastName,
+      email: input.email,
+      gender: input.gender,
+      birthday: input.birthday,
     };
     return res;
   }
 
-  async findOne(Id: number): Promise<UserResponseDto> {
-    const userDbData = await this.usersRepository.findOneBy({ Id });
+  async findOne(id: number): Promise<UserResponseDto> {
+    const userDbData = await this.usersRepository.findOneBy({ id });
     return this.convertUserOutputModel(userDbData);
   }
 
   async create(user: CreateUserRequestDto): Promise<UserResponseDto> {
     const exist = await this.usersRepository.exist({
-      where: { Email: user.email },
+      where: { email: user.email },
     });
-    const Password = enCodePassword(user.password);
-    const hashingPassword = this.usersRepository.create({ ...user, Password });
+    const password = enCodePassword(user.password);
+    const hashingPassword = this.usersRepository.create({ ...user, password });
     console.log("hash", hashingPassword);
     if (exist) {
       throw new ConflictException();
     }
     const requsetUser = {
-      FirstName: user.name,
-      LastName: user.lastname,
-      Email: user.email,
-      Password: user.password,
-      Birthday: user.birthday,
-      Gender: user.gender,
+      firstName: user.name,
+      lastName: user.lastname,
+      email: user.email,
+      password: user.password,
+      birthday: user.birthday,
+      gender: user.gender,
     };
     const userDbData = await this.usersRepository.save(requsetUser);
     return this.convertUserOutputModel(userDbData);
@@ -68,8 +68,8 @@ export class UserService {
   async login(user: LoginRequestDto): Promise<UserResponseDto> {
     const userDbData = await this.usersRepository.findOne({
       where: {
-        Email: user.email,
-        Password: user.password,
+        email: user.email,
+        password: user.password,
       },
     });
     return this.convertUserOutputModel(userDbData);
