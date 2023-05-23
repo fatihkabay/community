@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FC, ChangeEvent } from "react";
-import { getCar, getUser, setCar } from "../../utils/helpers";
+import { clearStorage, getCar, getUser, setCar } from "../../utils/helpers";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
 import { Input, Form, Button, message } from "antd";
@@ -98,16 +98,16 @@ const Home: FC = () => {
   const onGetFinish = async (carsInfo: GetCarInputModel) => {
     setLoading(true);
     const newCar: GetCarInputModel = {
-      Brand: carsInfo.Brand,
-      Model: carsInfo.Model,
-      Year: carsInfo.Year,
-      Kilometer: carsInfo.Kilometer,
+      brand: carsInfo.brand,
+      model: carsInfo.model,
+      year: carsInfo.year,
+      kilometer: carsInfo.kilometer,
     };
 
     try {
-      const res = await CarService.create(newCar);
-      setCar(res);
-      setLoading(false);
+      await CarService.create(newCar);
+      clearStorage();
+       setLoading(false);
       message.success("Successfully purchase car");
     } catch (error) {
       message.error("Not Found");

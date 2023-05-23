@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ITask } from '../../pages/Home/interfaces';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Form, Button, message } from 'antd';
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Loading from "../../components/Loading";
@@ -51,6 +51,7 @@ const TodoTask= ({task, completeTask}:Props) => {
       <span><strong>Year</strong>:{task.dead}</span>
       <span><strong>Kilometer</strong>:{task.deadLine}</span>
     <Button htmlType='submit' onClick={() => completeTask(task.taskName)}><DeleteOutlined /></Button>
+    <Button><EditOutlined/></Button>
   </div>
   </Form>
   );
