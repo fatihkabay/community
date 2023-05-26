@@ -1,11 +1,11 @@
-import React, { useEffect, useState, FC, ChangeEvent } from "react";
-import { clearStorage, getCar, getUser, setCar } from "../../utils/helpers";
+import { useEffect, useState, FC, ChangeEvent } from "react";
+import { getCar, getUser, setCar } from "../../utils/helpers";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
 import { Input, Form, Button, message } from "antd";
 import { Rule } from "antd/es/form";
 import CarService from "../../services/Car/CarService";
-import { GetCarInputModel } from "../../services/Car/Models";
+import { CarOutputModel, GetCarInputModel } from "../../services/Car/Models";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Loading from "../../components/Loading";
 import TodoTask from "../../components/TodoTask";
@@ -105,8 +105,8 @@ const Home: FC = () => {
     };
 
     try {
-      await CarService.create(newCar);
-      clearStorage();
+      const res = await CarService.create(newCar);
+      setCar(res);
        setLoading(false);
       message.success("Successfully purchase car");
     } catch (error) {

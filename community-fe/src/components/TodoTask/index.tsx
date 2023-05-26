@@ -6,7 +6,7 @@ import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Loading from "../../components/Loading";
 import { DeleteOutputModel } from '../../services/Car/Models';
 import CarService from '../../services/Car/CarService';
-import { clearStorage, setCar } from '../../utils/helpers';
+import { clearStorage } from '../../utils/helpers';
 import "./task.css"
 
 interface Props{
@@ -35,14 +35,14 @@ const TodoTask= ({task, completeTask}:Props) => {
       setLoading(false);
     }
   };
-  const onFinishFailed = (error: ValidateErrorEntity<any>) => {
+  const onDeleteFailed = (error: ValidateErrorEntity<any>) => {
     console.error(error, message);
   };
   return (
     <Form
       className="home-page"
       onFinish={onDelete}
-      onFinishFailed={onFinishFailed}
+      onFinishFailed={onDeleteFailed}
     >
       {loading && <Loading />}
   <div className="task">

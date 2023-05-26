@@ -15,11 +15,12 @@ export interface CarOutputModel {
 }
 
 export interface UpdateOutputModel {
-    name: string;
-    lastname: string;
-    email: string;
-    gender: string;
-    birthday: number;
+    id: number;
+    userId: number;
+    brand: string;
+    model: string;
+    year: string;
+    kilometer: string;
 }
 
 export interface DeleteOutputModel {
